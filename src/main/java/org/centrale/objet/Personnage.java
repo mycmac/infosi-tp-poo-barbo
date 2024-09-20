@@ -1,4 +1,4 @@
-package com.mycompany.projet_git;
+package org.centrale.objet.WoE;
 import java.util.Random;
 public class Personnage {
     private String nom ;
