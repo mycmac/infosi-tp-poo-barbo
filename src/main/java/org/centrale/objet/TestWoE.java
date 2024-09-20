@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.centrale.objet;
+package org.centrale.objet.WoE;
 
 /**
  *
@@ -25,8 +25,13 @@ public class TestWoE {
         System.out.println("Nouvelle coordonée point p1 de +1 : " + p1);
         
         p1.modifier(10,10);
-        System.out.println("Nouvelle coordonée point p1 (10,10) : " + p1);*/
+        System.out.println("Nouvelle coordonée point p1 (10,10) : " + p1);
+        */
+        World world = new World();
+        
+        world.creerMondeAlea();
+        
     }    
 }
-    
+
    
