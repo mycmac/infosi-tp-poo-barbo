@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.centrale.objet;
+package org.centrale.objet.WoE;
+
+import java.util.Random;
 
 public class Monstre {
     private int ptVie ; 
@@ -85,8 +87,16 @@ public class Monstre {
     public void setPos(Point2D pos) {
         this.pos = pos;
     }
-    public void deplace(){
-        
+    public void deplace() {
+        Random rand = new Random();
+        // Générer des déplacements aléatoires sur l'axe X et Y
+        int dx = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
+        int dy = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
+
+        // Déplacer le personnage en ajoutant dx et dy à sa position actuelle
+        pos.translate(dx, dy);
+
+        System.out.println("Personnage déplacé à la position : " + pos);
     }
 
    
