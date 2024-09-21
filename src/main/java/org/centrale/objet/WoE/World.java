@@ -10,7 +10,7 @@ public class World {
     private Lapin bugs2= new Lapin();
     private Archer robin=new Archer();
     private Paysan peon= new Paysan();
-    private Archer guillaumeT = new Archer(robin) ;
+    private Archer guillaumeT = new Archer() ;
     //private Guerrier grosBill = new Guerrier();
     //private Loup wolfie = new Wolfie();
     
@@ -51,20 +51,34 @@ public class World {
         do {
             x2 = generateurAleatoire.nextInt(100);
             y2 = generateurAleatoire.nextInt(100);
-        } while (xpa == x2 && ypa == y2);  // Vérifie que le lapin2 n'est pas à la même position que le Paysan 
-        robin.getPos().setX(x2);
-        robin.getPos().setY(y2);
+        } while ((xpa == x2 && ypa == y2) ||(xl == x2 && yl == y2) || (xar == x2 && yar == y2));                                           // Vérifie que le lapin2 n'est pas à la même position que le Paysan 
+        bugs2.getPos().setX(x2);
+        bugs2.getPos().setY(y2);
         
         int xgu, ygu;
         do {
             xgu = generateurAleatoire.nextInt(100);
             ygu = generateurAleatoire.nextInt(100);
-        } while (x2 == xgu && y2 == ygu);  // Vérifie que guillaume n'est pas à la même position que le Paysan Lapin2
-        robin.getPos().setY(ygu);
-
-    
+        } while ((x2 == xgu && y2 == ygu )||(xpa == xgu && ypa == ygu) ||(xl == xgu && yl == ygu) || (xar == xgu && yar == ygu));  // Vérifie que guillaume n'est pas à la même position que le Paysan Lapin2
+        guillaumeT.getPos().setY(ygu);
+        guillaumeT.getPos().setX(xgu);
+        /*
+        int xgro, ygro;
+        do {
+            xgro = generateurAleatoire.nextInt(100);
+            ygro = generateurAleatoire.nextInt(100);
+        } while ((xgro == xgu && ygro == ygu)||(x2 == xgro && y2 == ygro )||(xpa == xgro && ypa == ygro) ||(xl == xgro && yl == ygro) || (xar == xgro && yar == ygro));  // Vérifie que guillaume n'est pas à la même position que le Paysan Lapin2
+        grosBill.getPos().setY(ygro);        
+        grosBill.getPos().setX(xgro);   
         
-        
+          int xwol, ywol;
+        do {
+            xwol = generateurAleatoire.nextInt(100);
+            ywol = generateurAleatoire.nextInt(100);
+        } while ((xwol == xgro && ywol == ygro)||(xwol == xgu && ywol == ygu)||(x2 == xwol && y2 == ywol )||(xpa == xwol && ypa == ywol) ||(xl == xwol && yl == ywol) || (xar == xwol && yar == ywol));  // Vérifie que guillaume n'est pas à la même position que le Paysan Lapin2
+        wolfie.getPos().setY(ywol);        
+        wolfie.getPos().setX(xwol);   
+        */
         // Affichage des positions initiales
         //System.out.println("Position initiale de bugs (Lapin) : " + bugs.getPos());
         System.out.println("Position initiale de robin (Archer) : " + robin.getPos());
@@ -82,7 +96,15 @@ public class World {
         //System.out.println("Position de bugs (Lapin) : " + bugs.getPos());
         System.out.println("Position de robin (Archer) : " + robin.getPos());
         //System.out.println("Position de peon (Paysan) : " + peon.getPos());
-        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());
+        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());          
+    }
+    public void tourdejeu(){
+        
+    }
+    
+    public void afichewworld(){
+        System.out.println("Age: " + age);
+        System.out.println("Age: " + age);
     }
 }
 
