@@ -79,14 +79,16 @@ public class World {
         wolfie.getPos().setY(ywol);        
         wolfie.getPos().setX(xwol);   
         */
-        // Affichage des positions initiales
-        //System.out.println("Position initiale de bugs (Lapin) : " + bugs.getPos());
+        
+        
+        // Affichage des positions initiales ( inutile car on a la fonction afiche wolrd 
+        /*System.out.println("Position initiale de bugs (Lapin) : " + bugs.getPos());
         System.out.println("Position initiale de robin (Archer) : " + robin.getPos());
         //System.out.println("Position initiale de peon (Paysan) : " + peon.getPos());
         System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());
 
         // Déplacement aléatoire des personnages
-        //bugs.deplace();
+        bugs.deplace();
         robin.deplace();
         //peon.deplace();
         //guillaumeT.deplace();
@@ -96,15 +98,21 @@ public class World {
         //System.out.println("Position de bugs (Lapin) : " + bugs.getPos());
         System.out.println("Position de robin (Archer) : " + robin.getPos());
         //System.out.println("Position de peon (Paysan) : " + peon.getPos());
-        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());          
+        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());*/         
     }
     public void tourdejeu(){
         
     }
     
     public void afichewworld(){
-        System.out.println("Age: " + age);
-        System.out.println("Age: " + age);
+        System.out.println("Position bugs1 : " + bugs1.getPos());
+        System.out.println("Position bugs2 : " + bugs2.getPos());
+        System.out.println("Position robin: " + robin.getPos());
+        System.out.println("Position peon : " + peon.getPos());
+        System.out.println("Position guillaumeT : " + guillaumeT.getPos());
+        /*System.out.println("Position grosbill  : " + grosBill.getPos());
+        System.out.println("Position wolfi : " + wolfie.getPos());*/
     }
 }
+
 
