@@ -30,6 +30,7 @@ public class TestWoE {
         World w = new World();
         
         w.creerMondeAlea();
+        w.afichewworld();
         
     }    
 }

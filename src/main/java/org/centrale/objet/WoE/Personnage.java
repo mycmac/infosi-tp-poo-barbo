@@ -130,4 +130,11 @@ public class Personnage {
     public void affiche() {
         System.out.println("Nom :" + nom + ", " + "Point de vie "+ ptVie + ", "+degAtt+ ", "+ ptPar + ", "+ pageAtt +", " + distAttMax + ", " + "Position :"+ pos);
     }
+    
+    public double distance(Point2D p){
+        return Math.sqrt(Math.pow(p.getY() - this.pos.getY(), 2) + Math.pow(p.getX() - this.pos.getX(), 2));
+    }
+    
+    
+    
 }
