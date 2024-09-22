@@ -1,120 +1,42 @@
 package org.centrale.objet.WoE;
+
 import java.util.Random;
-public class Personnage {
-    private String nom ;
-    private int ptVie ;
-    private int degAtt ;
-    private int ptPar ;
-    private int pageAtt ;
-    private int pagePar ; 
-    private int distAttMax ;
-    private Point2D pos ;
-    
-    //Constructeur par défaut 
-    
-    public Personnage(){
+
+public class Personnage extends Creature {
+    private int distAttMax;
+
+    // Constructeur par défaut
+    public Personnage() {
+        super();  // Appel au constructeur par défaut de Creature
         this.nom = null;
-        this.ptVie = 0 ;
-        this.degAtt = 0 ;
-        this.ptPar = 0 ;
-        this.pageAtt = 0 ;
-        this.pagePar = 0 ;
-        this.distAttMax = 0 ;
-        this.pos = new Point2D() ;
+        this.distAttMax = 0;
     }
-    
-    //Constructeur avec paramètres
-    
-    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dmax, Point2D p){
+
+    // Constructeur avec paramètres
+    public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int distAttMax, Point2D p) {
+        super(pV, dA, pPar, paAtt, paPar, p);  // Appel au constructeur de Creature
         this.nom = n;
-        this.ptVie = pV ;
-        this.degAtt = dA ;
-        this.ptPar = pPar ;
-        this.pageAtt = paAtt ;
-        this.pagePar = paPar ;
-        this.distAttMax = dmax ;
-        this.pos = p ;
+        this.distAttMax = distAttMax;
     }
-    
-    //Constructeur de copie
-    
-    public Personnage(Personnage pers){
+
+    // Constructeur de copie
+    public Personnage(Personnage pers) {
+        super(pers);  // Appel au constructeur de copie de Creature
         this.nom = pers.nom;
-        this.ptVie = pers.ptVie ;
-        this.degAtt = pers.degAtt ;
-        this.ptPar = pers.ptPar ;
-        this.pageAtt = pers.pageAtt ;
-        this.pagePar = pers.pagePar ;
-        this.distAttMax = pers.distAttMax ;
-        this.pos = pers.pos ;
-    }
-    
-    //Accesseur pour le nom
-    
-    public String getNom(){
-        return nom ;
-    }
-    
-    public void setNom(String n){
-        this.nom = n;
+        this.distAttMax = pers.distAttMax;
     }
 
-    public void setPtVie(int ptVie) {
-        this.ptVie = ptVie;
-    }
+    // Accesseurs et mutateurs pour les attributs spécifiques à Personnage
 
-    public void setDegAtt(int degAtt) {
-        this.degAtt = degAtt;
-    }
-
-    public void setPtPar(int ptPar) {
-        this.ptPar = ptPar;
-    }
-
-    public void setPageAtt(int pageAtt) {
-        this.pageAtt = pageAtt;
-    }
-
-    public void setPagePar(int pagePar) {
-        this.pagePar = pagePar;
+    public int getDistAttMax() {
+        return distAttMax;
     }
 
     public void setDistAttMax(int distAttMax) {
         this.distAttMax = distAttMax;
     }
 
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
-
-    public int getPtVie() {
-        return ptVie;
-    }
-
-    public int getDegAtt() {
-        return degAtt;
-    }
-
-    public int getPtPar() {
-        return ptPar;
-    }
-
-    public int getPageAtt() {
-        return pageAtt;
-    }
-
-    public int getPagePar() {
-        return pagePar;
-    }
-
-    public int getDistAttMax() {
-        return distAttMax;
-    }
-
-    public Point2D getPos() {
-        return pos;
-    }
-    
+    @Override
     public void deplace() {
         Random rand = new Random();
         // Générer des déplacements aléatoires sur l'axe X et Y
@@ -126,15 +48,21 @@ public class Personnage {
 
         System.out.println("Personnage déplacé à la position : " + pos);
     }
-    
+
+    @Override
     public void affiche() {
         System.out.println("Nom :" + nom + ", " + "Point de vie "+ ptVie + ", "+degAtt+ ", "+ ptPar + ", "+ pageAtt +", " + distAttMax + ", " + "Position :"+ pos);
     }
     
-    public double distance(Point2D p){
-        return Math.sqrt(Math.pow(p.getY() - this.pos.getY(), 2) + Math.pow(p.getX() - this.pos.getX(), 2));
+    
+    @Override
+    public float distance(Point2D p){
+        return (float) Math.sqrt(Math.pow(p.getY() - this.pos.getY(), 2) + Math.pow(p.getX() - this.pos.getX(), 2));
     }
-    
-    
-    
+
+    @Override
+    public void combattre(Creature c) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
