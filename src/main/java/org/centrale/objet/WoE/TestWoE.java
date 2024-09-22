@@ -27,10 +27,9 @@ public class TestWoE {
         p1.modifier(10,10);
         System.out.println("Nouvelle coordonée point p1 (10,10) : " + p1);
         */
-        World w = new World();
+        IllustrationCombat world = new IllustrationCombat();
         
-        w.creerMondeAlea();
-        w.afichewworld();
+        world.creerMondeAlea();
         
     }    
 }
