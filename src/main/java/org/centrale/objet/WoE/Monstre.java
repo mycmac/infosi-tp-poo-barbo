@@ -6,101 +6,51 @@ package org.centrale.objet.WoE;
 
 import java.util.Random;
 
-public class Monstre {
-    private int ptVie ; 
-    private int degAtt ;
-    private int ptPar; 
-    private int pageAtt; 
-    private int pagePar;
-    private Point2D pos;
+public class Monstre extends Creature {
+
     
-    public Monstre(int ptVie, int degAtt,int ptPar, int pageAtt,int pagePar, Point2D pos){
-        this.ptVie=ptVie;
-        this.degAtt=degAtt; 
-        this.ptPar=ptPar;
-        this.pageAtt=pageAtt;
-        this.pagePar=pagePar;
-        this.pos=pos;     
+    public Monstre(String n, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos) {
+        super(ptVie, degAtt, ptPar, pageAtt, pagePar, pos);
+        this.nom = n ;
     }
-    public Monstre(Monstre m){
-        this.ptVie=m.ptVie;
-        this.degAtt=m.degAtt; 
-        this.ptPar=m.ptPar;
-        this.pageAtt=m.pageAtt;
-        this.pagePar=m.pagePar;
-        this.pos=m.pos;       
+
+    public Monstre(Monstre m) {
+        super(m.ptVie, m.degAtt, m.ptPar, m.pageAtt, m.pagePar, m.pos);
+        this.nom = m.nom ;
+    }
+
+    public Monstre() {
+        super(0, 0, 0, 0, 0, new Point2D());
     }
     
- public Monstre(){
-        this.ptVie=0;
-        this.degAtt=0;
-        this.ptPar=0;
-        this.pageAtt=0;
-        this.pagePar=0;
-        this.pos= new Point2D();      
- }
-
-    public int getPtVie() {
-        return ptVie;
+    public void setNom(String n){
+        this.nom = n;
     }
-
-    public int getDegAtt() {
-        return degAtt;
+    
+    public String getNom(){
+        return nom ;
     }
+    
 
-    public int getPtPar() {
-        return ptPar;
-    }
-
-    public int getPageAtt() {
-        return pageAtt;
-    }
-
-    public int getPagePar() {
-        return pagePar;
-    }
-
-    public Point2D getPos() {
-        return pos;
-    }
-
-    public void setPtVie(int ptVie) {
-        this.ptVie = ptVie;
-    }
-
-    public void setDegAtt(int degAtt) {
-        this.degAtt = degAtt;
-    }
-
-    public void setPtPar(int ptPar) {
-        this.ptPar = ptPar;
-    }
-
-    public void setPageAtt(int pageAtt) {
-        this.pageAtt = pageAtt;
-    }
-
-    public void setPagePar(int pagePar) {
-        this.pagePar = pagePar;
-    }
-
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
+    @Override
     public void deplace() {
         Random rand = new Random();
-        // Générer des déplacements aléatoires sur l'axe X et Y
-        int dx = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
-        int dy = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
-
-        // Déplacer le personnage en ajoutant dx et dy à sa position actuelle
+        int dx = rand.nextInt(3) - 1;
+        int dy = rand.nextInt(3) - 1;
         pos.translate(dx, dy);
-
-        System.out.println("Personnage déplacé à la position : " + pos);
+        System.out.println("Monstre déplacé à la position : " + pos);
     }
 
-   
+    @Override
     public void affiche() {
-        System.out.println( "Monstre{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + '}');
+        System.out.println("Monstre{" + nom + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar 
+                + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + '}');
     }
+
+    @Override
+    public void combattre(Creature c) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
 }
