@@ -149,4 +149,10 @@ public abstract class Creature {
         System.out.println("Creature{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar
                 + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + '}');
     }
+    public void recuperePointDeVie(int point){
+        this.ptVie= this.ptVie+point; 
+        if (this.ptVie> 100){
+            this.ptVie=100;// un personnage ne peut pas avoir plus de 100 point de vie
+        }
+    }
 }

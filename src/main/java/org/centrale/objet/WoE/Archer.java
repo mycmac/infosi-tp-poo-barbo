@@ -45,6 +45,7 @@ public class Archer extends Personnage {
         } else {
             System.out.println("L'archer rate son tir sur " + c.getNom() + ".");
         }
+        this.nbFleches = this.nbFleches - 1; // enleve 1 fleche car l'archer a tiré. 
     } else {
         System.out.println("La cible est hors de portée pour un tir à distance.");
     }

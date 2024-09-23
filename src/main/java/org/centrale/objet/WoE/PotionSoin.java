@@ -9,5 +9,9 @@ package org.centrale.objet.WoE;
  * @author barbo
  */
 public class PotionSoin extends Objet {
-        private int soin; 
+        private int soin; // nombre de point de vie que la potion donne 
+        public int utiliser(){
+            return soin;
+        }
+   
 }
