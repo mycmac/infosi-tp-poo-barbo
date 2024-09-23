@@ -27,19 +27,19 @@ public class TestWoE {
         p1.modifier(10,10);
         System.out.println("Nouvelle coordonée point p1 (10,10) : " + p1);
         */
-        /*IllustrationCombat world = new IllustrationCombat();
+        IllustrationCombat world = new IllustrationCombat();
         
-        world.creerMondeAlea();*/
-        PotionSoin p = new PotionSoin(); 
+        world.creerMondeAlea();
+        /*PotionSoin p = new PotionSoin(); 
         Creature wolfie = new Loup("wolfie",70, 25,50, 30 ,15, new Point2D(0,0)) ;
         p.setSoin(20);
         System.out.println("Point de vie du loup : " + wolfie.ptVie);
         wolfie.recuperePointDeVie(p.utiliser());
         System.out.println("Point de vie du loup apres potion: " + wolfie.ptVie);
         
-        p= null;
+        p= null;*/
         
-    }    
+    }  
 }
 
    
