@@ -13,5 +13,13 @@ public class PotionSoin extends Objet {
         public int utiliser(){
             return soin;
         }
+
+    public int getSoin() {
+        return soin;
+    }
+
+    public void setSoin(int soin) {
+        this.soin = soin;
+    }
    
 }
