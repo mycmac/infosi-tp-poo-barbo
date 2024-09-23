@@ -62,8 +62,8 @@ public class Point2D {
 
     // Méthode pour calculer la distance à un autre point
     public double distanceTo(Point2D p) {
-        int dx = p.x - this.x;
-        int dy = p.y - this.y;
+        int dx = p.getX() - this.x;
+        int dy = p.getY() - this.y;
         return Math.sqrt(dx * dx + dy * dy);
     }
 

@@ -35,7 +35,7 @@ public class Archer extends Personnage {
     @Override
     public void combattre(Creature c) {
     Random rand = new Random();
-    float distance = this.pos.distanceTo(c.getPos());
+    double distance = this.pos.distanceTo(c.getPos());
 
     if (distance > 1 && distance <= this.getDistAttMax()) {  // Combat à distance
         int jetAttaque = rand.nextInt(100) + 1;

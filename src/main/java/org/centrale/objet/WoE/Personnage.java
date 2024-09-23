@@ -36,7 +36,7 @@ public class Personnage extends Creature {
         this.distAttMax = distAttMax;
     }
 
-    @Override
+    /*@Override
     public void deplace() {
         Random rand = new Random();
         // Générer des déplacements aléatoires sur l'axe X et Y
@@ -48,18 +48,18 @@ public class Personnage extends Creature {
 
         System.out.println("Personnage déplacé à la position : " + pos);
     }
-
+*/
     @Override
     public void affiche() {
         System.out.println("Nom :" + nom + ", " + "Point de vie "+ ptVie + ", "+degAtt+ ", "+ ptPar + ", "+ pageAtt +", " + distAttMax + ", " + "Position :"+ pos);
     }
     
-    
+/*    
     @Override
     public float distance(Point2D p){
         return (float) Math.sqrt(Math.pow(p.getY() - this.pos.getY(), 2) + Math.pow(p.getX() - this.pos.getX(), 2));
     }
-
+*/
     @Override
     public void combattre(Creature c) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

@@ -30,7 +30,7 @@ public class Guerrier extends Personnage {
     @Override
     public void combattre(Creature c) {
     Random rand = new Random();
-    float distance = this.pos.distanceTo(c.getPos());
+    double distance = this.pos.distanceTo(c.getPos());
 
     if (distance == 1) {  // Combat au corps à corps
         int jetAttaque = rand.nextInt(100) + 1;
