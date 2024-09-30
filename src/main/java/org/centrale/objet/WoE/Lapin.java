@@ -4,6 +4,9 @@
  */
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author barbo
@@ -20,6 +23,18 @@ public class Lapin extends Monstre {
     
     public Lapin(){
         super();
-    }   
+    } 
+    
+    public void  crea_lapin(ArrayList<Creature> a){
+    Random random= new Random();
+    int alea = random.nextInt(100);
+
+    for (int i=0; i<alea; i++ ){
+        String n = "Lapin" + i;
+        Lapin la= new Lapin();
+        la.setNom(n);
+        a.add(la);
+    }
+    } 
 
 }

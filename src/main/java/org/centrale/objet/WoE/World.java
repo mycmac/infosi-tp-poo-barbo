@@ -4,6 +4,7 @@
  */
 package org.centrale.objet.WoE;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class World {
     private Lapin bugs1= new Lapin();
@@ -22,7 +23,7 @@ public class World {
     public void creerMondeAlea() {
         
         Random generateurAleatoire = new Random();  // Assurez-vous que vous avez un générateur aléatoire
-
+        /*
         // Position du Lapin
         int xl = generateurAleatoire.nextInt(100);
         int yl = generateurAleatoire.nextInt(100);
@@ -98,7 +99,7 @@ public class World {
         //System.out.println("Position de bugs (Lapin) : " + bugs.getPos());
         System.out.println("Position de robin (Archer) : " + robin.getPos());
         //System.out.println("Position de peon (Paysan) : " + peon.getPos());
-        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());*/         
+        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());      
     }
     public void tourdejeu(){
         
@@ -111,8 +112,13 @@ public class World {
         System.out.println("Position peon : " + peon.getPos());
         System.out.println("Position guillaumeT : " + guillaumeT.getPos());
         /*System.out.println("Position grosbill  : " + grosBill.getPos());
-        System.out.println("Position wolfi : " + wolfie.getPos());*/
+        System.out.println("Position wolfi : " + wolfie.getPos());
     }
+    */
+    ArrayList<Creature> cre_monde = new ArrayList<>(); 
+    ArrayList<Objet> obj_monde = new ArrayList<>();
+   
+        
 }
 
 

@@ -13,4 +13,13 @@ package org.centrale.objet.WoE;
 public class Objet {
     private String nom;
     private Point2D pos; 
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPos(Point2D pos) {
+        this.pos = pos;
+    }
+    
 }

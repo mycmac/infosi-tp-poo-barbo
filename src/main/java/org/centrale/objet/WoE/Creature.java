@@ -1,4 +1,5 @@
 package org.centrale.objet.WoE;
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Creature {
@@ -155,4 +156,6 @@ public abstract class Creature {
             this.ptVie=100;// un personnage ne peut pas avoir plus de 100 point de vie
         }
     }
+    
+
 }

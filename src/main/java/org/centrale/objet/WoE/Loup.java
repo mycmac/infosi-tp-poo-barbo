@@ -4,6 +4,7 @@
  */
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -99,5 +100,16 @@ public class Loup extends Monstre {
         System.out.println("Le loup est trop loin pour attaquer.");
     }
 }
+    public void  crea_Loup(ArrayList<Creature> a){
+    Random random= new Random();
+    int alea = random.nextInt(100);
+
+    for (int i=0; i<alea; i++ ){
+        String n = "Loup" + i;
+        Loup lo= new Loup();
+        lo.setNom(n);
+        a.add(lo);
+    }
+    } 
 
 }

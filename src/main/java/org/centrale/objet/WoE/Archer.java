@@ -5,14 +5,15 @@
 package org.centrale.objet.WoE;
 
 import java.util.Random ;
-
+import java.util.ArrayList;
 /**
  *
  * @author PRO
  */
 public class Archer extends Personnage {
     private int nbFleches;
-    
+
+
 
     public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int distAttMax, Point2D p, int nbFleches) {
         super(n, pV, dA, pPar, paAtt, paPar, distAttMax, p);
@@ -60,5 +61,16 @@ public class Archer extends Personnage {
         super.affiche();
         System.out.println("Nombre de flèches: " + nbFleches);
     }
+    public void  crea_archer(ArrayList<Creature> a){
+    Random random= new Random();
+    int alea = random.nextInt(100);
+
+    for (int i=0; i<alea; i++ ){
+        String n = "Archer" + i;
+        Archer arch= new Archer();
+        arch.setNom(n);
+        a.add(arch);
+    }
+    } 
 }
     
