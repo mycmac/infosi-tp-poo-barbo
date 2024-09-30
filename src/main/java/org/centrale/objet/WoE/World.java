@@ -117,6 +117,34 @@ public class World {
     */
     ArrayList<Creature> cre_monde = new ArrayList<>(); 
     ArrayList<Objet> obj_monde = new ArrayList<>();
+
+    public void creation(){
+        
+        Archer a = new Archer() ;
+        a.crea_archer(liste_creatures) ;
+        
+        
+        Guerrier g = new Guerrier();
+        g.crea_guerrier(liste_creatures);
+        
+        Paysan p = new Paysan();
+        p.crea_paysan(liste_creatures);
+        
+        Loup l = new Loup();
+        l.crea_loup(liste_creatures);
+        
+        Lapin lap = new Lapin();
+        lap.crea_lapin(liste_creatures);
+        
+        Epee e = new Epee();
+        e.crea_epee(liste_objets);
+        
+        PotionSoin pot = new PotionSoin();
+        pot.crea_potion_soin(liste_objets);
+        
+        
+        
+    }
    
         
 }
