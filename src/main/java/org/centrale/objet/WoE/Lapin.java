@@ -29,10 +29,11 @@ public class Lapin extends Monstre {
     Random random= new Random();
     int alea = random.nextInt(100);
 
-    for (int i=0; i<alea; i++ ){
+    for (int i=0; i<20; i++ ){
         String n = "Lapin" + i;
         Lapin la= new Lapin();
         la.setNom(n);
+        la.dplt_case_libre(la,a);
         a.add(la);
     }
     } 

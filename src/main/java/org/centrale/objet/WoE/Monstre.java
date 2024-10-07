@@ -6,7 +6,7 @@ package org.centrale.objet.WoE;
 
 import java.util.Random;
 
-public class Monstre extends Creature {
+public abstract class Monstre extends Creature {
 
     
     public Monstre(String n, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos) {

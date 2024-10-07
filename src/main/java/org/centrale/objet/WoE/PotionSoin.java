@@ -4,6 +4,9 @@
  */
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author barbo
@@ -21,5 +24,16 @@ public class PotionSoin extends Objet {
     public void setSoin(int soin) {
         this.soin = soin;
     }
+        public void  crea_potion_soin(ArrayList<Objet> a){
+    Random random= new Random();
+    int alea = random.nextInt(100);
+
+    for (int i=0; i<alea; i++ ){
+        String n = "Potion soin" + i;
+        PotionSoin po= new PotionSoin();
+        po.setNom(n);
+        a.add(po);
+        }
+    } 
    
 }

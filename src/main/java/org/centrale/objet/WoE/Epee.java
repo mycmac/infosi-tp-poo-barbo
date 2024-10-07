@@ -4,11 +4,30 @@
  */
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author barbo
  */
-public class Epee {
+public class Epee extends Objet  {
 
-    private int puissance; 
+    private int puissance;
+    
+    public void  crea_epee(ArrayList<Objet> a){
+    Random random= new Random();
+    int alea = random.nextInt(100);
+
+    for (int i=0; i<alea; i++ ){
+        String n = "Epee" + i;
+        Epee e= new Epee();
+        e.setNom(n);
+        a.add(e);
+        }
+    } 
 }
+
+
+
+ 

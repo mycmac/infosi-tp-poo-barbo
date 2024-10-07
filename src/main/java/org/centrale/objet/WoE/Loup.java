@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author PRO
  */
-public class Loup extends Monstre {
+public class Loup extends Monstre implements Combattant {
     
     public Loup(String n, int ptVie, int degAtt,int ptPar, int pageAtt,int pagePar, Point2D pos){
         super(n,ptVie,degAtt, ptPar, pageAtt,pagePar, pos);
@@ -100,14 +100,15 @@ public class Loup extends Monstre {
         System.out.println("Le loup est trop loin pour attaquer.");
     }
 }
-    public void  crea_Loup(ArrayList<Creature> a){
+    public void  crea_loup(ArrayList<Creature> a){
     Random random= new Random();
     int alea = random.nextInt(100);
 
-    for (int i=0; i<alea; i++ ){
+    for (int i=0; i<20; i++ ){
         String n = "Loup" + i;
         Loup lo= new Loup();
         lo.setNom(n);
+        lo.dplt_case_libre(lo,a);
         a.add(lo);
     }
     } 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author PRO
  */
-public class Guerrier extends Personnage {
+public class Guerrier extends Personnage implements Combattant {
     private Epee e;
 
     public Guerrier(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, Epee e) {
@@ -65,10 +65,12 @@ public class Guerrier extends Personnage {
     Random random= new Random();
     int alea = random.nextInt(100);
 
-    for (int i=0; i<alea; i++ ){
+    for (int i=0; i<20; i++ ){
         String n = "Guerrier" + i;
         Guerrier gue= new Guerrier();
         gue.setNom(n);
+        gue.setPtVie();
+        gue.dplt_case_libre(gue,  a);
         a.add(gue);
     }
     } 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author PRO
  */
-public class Archer extends Personnage {
+public class Archer extends Personnage implements Combattant {
     private int nbFleches;
 
 
@@ -63,14 +63,19 @@ public class Archer extends Personnage {
     }
     public void  crea_archer(ArrayList<Creature> a){
     Random random= new Random();
-    int alea = random.nextInt(100);
+//    int alea = random.nextInt(100);
 
-    for (int i=0; i<alea; i++ ){
+    for (int i=0; i<20; i++ ){
         String n = "Archer" + i;
         Archer arch= new Archer();
         arch.setNom(n);
+        arch.setPtVie();
+        arch.dplt_case_libre(arch,  a);
         a.add(arch);
+
+        }
+
     }
-    } 
+    
 }
     

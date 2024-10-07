@@ -50,8 +50,8 @@ public class Point2D {
     //Méthode pour translater 
     
     public void translate(int dx, int dy){
-        this.x = x+dx ;
-        this.y = y+dy ;
+        this.x = this.x+dx ;
+        this.y = this.y+dy ;
     }
     
     public void modifier(int xx, int yy){

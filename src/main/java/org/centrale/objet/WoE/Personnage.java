@@ -2,7 +2,7 @@ package org.centrale.objet.WoE;
 
 import java.util.Random;
 
-public class Personnage extends Creature {
+public abstract class Personnage extends Creature {
     private int distAttMax;
 
     // Constructeur par défaut

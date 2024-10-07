@@ -2,7 +2,7 @@ package org.centrale.objet.WoE;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Creature {
+public abstract class Creature implements deplacable {
     protected int ptVie; // Points de vie
     protected String nom ; // Nom
     protected int degAtt;  // Dégâts d'attaque
@@ -67,6 +67,11 @@ public abstract class Creature {
 
     public int getDegAtt() {
         return degAtt;
+    }
+    public void setPtVie(){
+        Random random = new Random();
+        int rand = random.nextInt(100);
+        this.ptVie = rand; 
     }
 
     public void setDegAtt(int degAtt) {
@@ -156,6 +161,36 @@ public abstract class Creature {
             this.ptVie=100;// un personnage ne peut pas avoir plus de 100 point de vie
         }
     }
-    
+    public ArrayList<Integer> retourpos(Creature crea){ // met la position sous forme de vecteur 
+        ArrayList<Integer> a= new ArrayList<>();
+        a.add(crea.getPos().getX());
+        a.add(crea.getPos().getY()); 
+        return a; 
+        
+    }
+    public void dplt_case_libre(Creature crea, ArrayList<Creature> a){
+        ArrayList<ArrayList<Integer >> position_crea = new ArrayList<>();
+        ArrayList<Integer> position_act= new ArrayList<>();
+        for (int y=0; y < a.size();y++ ){    // créer un vecteur de poosition 
+            position_crea.add(retourpos(a.get(y)));       
+        } 
+        do{ 
+            crea.deplace();
+            if(crea.getPos().getX()< 0){ // evite d'avoir une boucle infinie on remet la position à 0 
+                crea.getPos().setX(0);
+            }
+            if(crea.getPos().getY()< 0){
+                crea.getPos().setY(0);
+            }
+            
+            position_act = retourpos(crea);
+            
+         
+            
+        }while(position_crea.contains(position_act) || (crea.getPos().getX()< 0) || (crea.getPos().getY()< 0) );
+    }
+        
+ }
+ 
 
-}
+

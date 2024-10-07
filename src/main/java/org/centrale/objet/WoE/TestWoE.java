@@ -37,9 +37,15 @@ public class TestWoE {
         wolfie.recuperePointDeVie(p.utiliser());
         System.out.println("Point de vie du loup apres potion: " + wolfie.ptVie);
         
-        p= null;*/
-        
-    }  
-}
+//        p= null;*/
+//        World m = new World();
+//        m.creation();
 
-   
+    Joueur j = new Joueur();
+    j.créePerso(); 
+    
+    
+    
+
+    }
+}

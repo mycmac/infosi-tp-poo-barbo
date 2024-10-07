@@ -7,23 +7,107 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class World {
-    private Lapin bugs1= new Lapin();
+    /*private Lapin bugs1= new Lapin();
     private Lapin bugs2= new Lapin();
     private Archer robin=new Archer();
     private Paysan peon= new Paysan();
     private Archer guillaumeT = new Archer() ;
     //private Guerrier grosBill = new Guerrier();
     //private Loup wolfie = new Wolfie();
+    */
+    ArrayList<Creature> liste_creatures = new ArrayList<>(); 
+    ArrayList<Objet> liste_objets = new ArrayList<>();
     
     
-    public World(){
+
+
+    public void creation(){
+        
+        Archer a = new Archer() ;
+        a.crea_archer(liste_creatures) ;
+        
+        
+        Guerrier g = new Guerrier();
+        g.crea_guerrier(liste_creatures);
+        
+        Paysan p = new Paysan();
+        p.crea_paysan(liste_creatures);
+        
+        Loup l = new Loup();
+        l.crea_loup(liste_creatures);
+        
+        Lapin lap = new Lapin();
+        lap.crea_lapin(liste_creatures);
+        
+        Epee e = new Epee();
+        e.crea_epee(liste_objets);
+        
+        PotionSoin pot = new PotionSoin();
+        pot.crea_potion_soin(liste_objets);
+        
+//        int longueur = liste_creatures.size();
+//        int pvTotal= 0; 
+//        for (int i =0; i<longueur; i++ ){
+//            pvTotal = pvTotal + liste_creatures.get(i).getPtVie() ; 
+//        }
+        for (int i=0; i< liste_creatures.size();i++){
+           System.out.println("Position " + liste_creatures.get(i).getNom() + liste_creatures.get(i).getPos() ); 
+        }
+
+
+        
         
     }
+}
+
     
-    public void creerMondeAlea() {
-        
-        Random generateurAleatoire = new Random();  // Assurez-vous que vous avez un générateur aléatoire
-        /*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
         // Position du Lapin
         int xl = generateurAleatoire.nextInt(100);
         int yl = generateurAleatoire.nextInt(100);
@@ -115,38 +199,5 @@ public class World {
         System.out.println("Position wolfi : " + wolfie.getPos());
     }
     */
-    ArrayList<Creature> cre_monde = new ArrayList<>(); 
-    ArrayList<Objet> obj_monde = new ArrayList<>();
-
-    public void creation(){
-        
-        Archer a = new Archer() ;
-        a.crea_archer(liste_creatures) ;
-        
-        
-        Guerrier g = new Guerrier();
-        g.crea_guerrier(liste_creatures);
-        
-        Paysan p = new Paysan();
-        p.crea_paysan(liste_creatures);
-        
-        Loup l = new Loup();
-        l.crea_loup(liste_creatures);
-        
-        Lapin lap = new Lapin();
-        lap.crea_lapin(liste_creatures);
-        
-        Epee e = new Epee();
-        e.crea_epee(liste_objets);
-        
-        PotionSoin pot = new PotionSoin();
-        pot.crea_potion_soin(liste_objets);
-        
-        
-        
-    }
-   
-        
-}
 
 

@@ -30,10 +30,12 @@ public class Paysan extends Personnage {
     Random random= new Random();
     int alea = random.nextInt(100);
 
-    for (int i=0; i<alea; i++ ){
+    for (int i=0; i<20; i++ ){ // on met 20 pour placer les 100 protaganistes 
         String n = "Paysan" + i;
         Paysan pa= new Paysan();
         pa.setNom(n);
+        pa.setPtVie();
+        pa.dplt_case_libre(pa,a);
         a.add(pa);
     }
     } 
