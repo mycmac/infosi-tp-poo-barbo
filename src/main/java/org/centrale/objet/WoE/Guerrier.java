@@ -72,7 +72,7 @@ public class Guerrier extends Personnage implements Combattant {
 
     for (int i=0; i<20; i++ ){
         String n = "Guerrier" + i;
-        Guerrier gue= new Guerrier(2);
+        Guerrier gue= new Guerrier();
         gue.setNom(n);
         gue.setPtVie();
         gue.dplt_case_libre(gue,  a);

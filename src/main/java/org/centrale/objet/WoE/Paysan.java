@@ -34,7 +34,7 @@ public class Paysan extends Personnage {
 
     for (int i=0; i<20; i++ ){ // on met 20 pour placer les 100 protaganistes 
         String n = "Paysan" + i;
-        Paysan pa= new Paysan(3);
+        Paysan pa= new Paysan();
         pa.setNom(n);
         pa.setPtVie();
         pa.dplt_case_libre(pa,a);

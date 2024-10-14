@@ -34,7 +34,7 @@ public class Lapin extends Monstre {
 
     for (int i=0; i<20; i++ ){
         String n = "Lapin" + i;
-        Lapin la= new Lapin(5);
+        Lapin la= new Lapin();
         la.setNom(n);
         la.dplt_case_libre(la,a);
         a.add(la);

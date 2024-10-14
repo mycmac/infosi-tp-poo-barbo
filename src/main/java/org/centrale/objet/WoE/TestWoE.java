@@ -4,15 +4,6 @@
  */
 package org.centrale.objet.WoE;
 
-import javax.swing.JFrame;
-import java.awt.Graphics;
-import java.util.List;
-import java.util.Scanner;
-
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author barbo
@@ -50,36 +41,11 @@ public class TestWoE {
 //        World m = new World();
 //        m.creation();
 
-    Joueur j = new Joueur(); // créer le perssonage 
-    World w = new World(); // créer un world  
-    w.creation(); // place les personnages sur la map 
-    j.creePerso();
-  
-    // pour l'affichage
-    JFrame frame = new JFrame("Grille de Jeu");
-    JeuGrille jeuGrille = new JeuGrille(j.getPersonnage(),w.liste_creatures); 
-    frame.add(jeuGrille);
-    frame.pack();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setVisible(true);
-    
-    while((!w.liste_creatures.isEmpty()) || j.getPersonnage().getPtVie()>0){// le jeu continue tant qu'il reste des monstres et tant que le joueur n'est pas mort 
-        System.out.println("1 : attaque ; 2 : deplacement");
-        Scanner scanner = new Scanner(System.in);
-        int choix = scanner.nextInt();
-        switch(choix){
-            case 1 : 
-                combattre // il faut avoir le nom de la créature 
-    
-                
-            case 2 : 
-                deplacement_joueur(w.liste_creatures);
-        }
-        
-        
-    }
-    
+    Joueur j = new Joueur();
+    j.creePerso(); 
 
     
+    
+
     }
 }

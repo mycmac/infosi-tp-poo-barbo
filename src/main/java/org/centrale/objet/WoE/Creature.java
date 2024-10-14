@@ -197,7 +197,7 @@ public abstract class Creature implements deplacable {
         int dx = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
         int dy = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
         pos.translate(dx, dy);
-        //System.out.println("Creature déplacée à la position : " + pos);
+        System.out.println("Creature déplacée à la position : " + pos);
     }
 
     /**
@@ -234,17 +234,12 @@ public abstract class Creature implements deplacable {
             if(crea.getPos().getY()< 0){
                 crea.getPos().setY(0);
             }
-            if(crea.getPos().getY() > 50 ){
-                crea.getPos().setY(50);
-            }
-            if(crea.getPos().getY()> 50){
-                crea.getPos().setY(50);
-            }
+            
             position_act = retourpos(crea);
             
          
             
-        }while(position_crea.contains(position_act) || (crea.getPos().getX()< 0) || (crea.getPos().getY()< 0)|| (crea.getPos().getX()>50) || (crea.getPos().getY()> 50 ) );
+        }while(position_crea.contains(position_act) || (crea.getPos().getX()< 0) || (crea.getPos().getY()< 0) );
     }
          
  }

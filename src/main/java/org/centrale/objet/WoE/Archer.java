@@ -77,7 +77,7 @@ public class Archer extends Personnage implements Combattant {
 
     for (int i=0; i<20; i++ ){
         String n = "Archer" + i;
-        Archer arch= new Archer(1);
+        Archer arch= new Archer();
         arch.setNom(n);
         arch.setPtVie();
         arch.dplt_case_libre(arch,  a);
