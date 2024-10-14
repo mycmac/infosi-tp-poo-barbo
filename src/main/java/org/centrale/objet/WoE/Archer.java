@@ -28,6 +28,16 @@ public class Archer extends Personnage implements Combattant {
     public Archer() {
         super();
     }
+    
+    /**
+     * il faut mettre 1 pour un archer 
+     * @param a = 1
+     */
+    
+    public Archer(int a){
+       super(a); 
+       this.nbFleches= 10; 
+    }
 
     public int getNbFleches() {
         return nbFleches;

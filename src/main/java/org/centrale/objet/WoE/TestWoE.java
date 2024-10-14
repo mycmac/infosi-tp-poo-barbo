@@ -42,7 +42,7 @@ public class TestWoE {
 //        m.creation();
 
     Joueur j = new Joueur();
-    j.créePerso(); 
+    j.creePerso(); 
     
     
     

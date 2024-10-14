@@ -28,6 +28,11 @@ public class Guerrier extends Personnage implements Combattant {
     public Guerrier() {
         super();
     }
+    public Guerrier(int a ) {
+        super(a);
+    }
+       
+    
     
     @Override
     public void combattre(Creature c) {

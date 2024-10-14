@@ -18,6 +18,22 @@ public abstract class Personnage extends Creature {
         this.nom = n;
         this.distAttMax = distAttMax;
     }
+    public Personnage(int a){
+        super(a);
+        switch (a){
+            case 1 : 
+                this.distAttMax = 5; 
+                break;
+            case 2 : 
+                 this.distAttMax = 1;
+                 break;
+                  
+            case 3 :                 
+                this.distAttMax = 0;
+                break;
+
+        }
+    }
 
     // Constructeur de copie
     public Personnage(Personnage pers) {

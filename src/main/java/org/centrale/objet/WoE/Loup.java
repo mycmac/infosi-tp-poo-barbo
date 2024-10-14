@@ -23,7 +23,12 @@ public class Loup extends Monstre implements Combattant {
     
     public Loup(){
         super();
-    }   
+    } 
+    public Loup(int a){
+        super(a);
+    }
+    
+ 
 
     public int getPtVie() {
         return ptVie;

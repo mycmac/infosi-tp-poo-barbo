@@ -55,6 +55,58 @@ public abstract class Creature implements deplacable {
         this.pagePar = 0;
         this.pos = new Point2D();
     }
+    /**
+ * Permet de créer un personage avec les valeurs qui lui corresponde
+ *
+ * @param 1 archer 
+ * @param 2 Guerrier
+ * @param 3 Paysan 
+ * @param 4 Loup 
+ * @param 5 Lapin
+ */
+    public Creature(int a){   // cette fonction permeet de créer des personnage avec les proba 
+        Random rand = new Random();
+        this.ptVie = 100;
+        switch (a) {
+            case 1:
+                this.degAtt = rand.nextInt(21) +40  ;
+                this.ptPar = rand.nextInt(11) +30  ;
+                this.pageAtt =rand.nextInt(11) +60  ;
+                this.pagePar = rand.nextInt(11) +40  ;
+                this.pos = new Point2D(); 
+                break;
+            case 2:
+                this.degAtt = rand.nextInt(21) +60  ;
+                this.ptPar = rand.nextInt(11) +30  ;
+                this.pageAtt =rand.nextInt(11) +70  ;
+                this.pagePar = rand.nextInt(11) +40  ;
+                this.pos = new Point2D();
+                break;
+            case 3:
+                this.degAtt = 0 ;
+                this.ptPar = rand.nextInt(11) +30  ;
+                this.pageAtt =0  ;
+                this.pagePar = rand.nextInt(11) +10  ;
+                this.pos = new Point2D();
+                break;
+            case 4:
+                this.degAtt = rand.nextInt(21) +50  ;
+                this.ptPar = 0 ;
+                this.pageAtt =rand.nextInt(11) +60  ;
+                this.pagePar = rand.nextInt(11) +10  ;
+                this.pos = new Point2D(); 
+                break;
+            case 5:
+                this.degAtt = rand.nextInt(11) +20  ;
+                this.ptPar = 0 ;
+                this.pageAtt =rand.nextInt(11) +60  ;
+                this.pagePar = rand.nextInt(11) +10  ;
+                this.pos = new Point2D();   
+                break; 
+                
+        }
+
+    }
 
     // Getters et Setters
     public int getPtVie() {
@@ -189,7 +241,7 @@ public abstract class Creature implements deplacable {
             
         }while(position_crea.contains(position_act) || (crea.getPos().getX()< 0) || (crea.getPos().getY()< 0) );
     }
-        
+         
  }
  
 

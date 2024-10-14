@@ -20,7 +20,9 @@ public class Paysan extends Personnage {
     public Paysan() {
         super();
     }
-
+    public Paysan(int a ) {
+        super(a );
+    }
     @Override
     public void affiche() {
         super.affiche();

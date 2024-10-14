@@ -23,6 +23,10 @@ public abstract class Monstre extends Creature {
         super(0, 0, 0, 0, 0, new Point2D());
     }
     
+    public Monstre(int a) {
+        super(a);
+    }   
+    
     public void setNom(String n){
         this.nom = n;
     }

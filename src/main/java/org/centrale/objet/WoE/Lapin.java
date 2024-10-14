@@ -23,7 +23,10 @@ public class Lapin extends Monstre {
     
     public Lapin(){
         super();
-    } 
+    }
+    public Lapin(int a){
+        super(a);
+    }    
     
     public void  crea_lapin(ArrayList<Creature> a){
     Random random= new Random();
