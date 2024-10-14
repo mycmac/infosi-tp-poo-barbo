@@ -2,6 +2,7 @@ package org.centrale.objet.WoE;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+ // Import uniquement JFrame
 
 public class JeuGrille extends JPanel {
 

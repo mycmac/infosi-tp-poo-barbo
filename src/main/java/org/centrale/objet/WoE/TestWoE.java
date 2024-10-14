@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.centrale.objet.WoE;
-
+import javax.swing.JFrame;  // Import uniquement JFrame
+import java.awt.Graphics;
+import java.util.List;
 /**
  *
  * @author barbo
@@ -41,8 +43,18 @@ public class TestWoE {
 //        World m = new World();
 //        m.creation();
 
-    //Joueur j = new Joueur();
-    //j.creePerso(); 
+    Joueur j = new Joueur();
+    World w = new World();
+    w.creation(); // place les personnages sur la map 
+    j.creePerso();
+  
+        // pour l'affichage
+    JFrame frame = new JFrame("Grille de Jeu"); // Utilisation de JFrame ici
+    JeuGrille jeuGrille = new JeuGrille(j.getPersonnage(), w.liste_creatures); 
+    frame.add(jeuGrille);
+    frame.pack();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Méthode spécifique à JFrame
+    frame.setVisible(true);
 
     
     

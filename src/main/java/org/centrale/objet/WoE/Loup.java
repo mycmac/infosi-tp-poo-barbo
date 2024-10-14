@@ -111,7 +111,7 @@ public class Loup extends Monstre implements Combattant {
 
     for (int i=0; i<20; i++ ){
         String n = "Loup" + i;
-        Loup lo= new Loup();
+        Loup lo= new Loup(4);
         lo.setNom(n);
         lo.dplt_case_libre(lo,a);
         a.add(lo);
