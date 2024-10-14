@@ -43,7 +43,7 @@ public class TestWoE {
 
     Joueur j = new Joueur();
     j.creePerso(); 
-    
+
     
     
 
