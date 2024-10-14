@@ -41,8 +41,8 @@ public class TestWoE {
 //        World m = new World();
 //        m.creation();
 
-    Joueur j = new Joueur();
-    j.creePerso(); 
+    //Joueur j = new Joueur();
+    //j.creePerso(); 
 
     
     
