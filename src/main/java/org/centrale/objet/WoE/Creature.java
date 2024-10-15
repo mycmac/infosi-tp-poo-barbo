@@ -67,41 +67,44 @@ public abstract class Creature implements deplacable {
     public Creature(int a){   // cette fonction permeet de créer des personnage avec les proba 
         Random rand = new Random();
         this.ptVie = 100;
+        this.pos = new Point2D(); 
+        this.pos.setX(25);
+        this.pos.setY(25);
         switch (a) {
             case 1:
                 this.degAtt = rand.nextInt(21) +40  ;
                 this.ptPar = rand.nextInt(11) +30  ;
                 this.pageAtt =rand.nextInt(11) +60  ;
                 this.pagePar = rand.nextInt(11) +40  ;
-                this.pos = new Point2D(); 
+                //this.pos = new Point2D(); 
                 break;
             case 2:
                 this.degAtt = rand.nextInt(21) +60  ;
                 this.ptPar = rand.nextInt(11) +30  ;
                 this.pageAtt =rand.nextInt(11) +70  ;
                 this.pagePar = rand.nextInt(11) +40  ;
-                this.pos = new Point2D();
+                //this.pos = new Point2D();
                 break;
             case 3:
                 this.degAtt = 0 ;
                 this.ptPar = rand.nextInt(11) +30  ;
                 this.pageAtt =0  ;
                 this.pagePar = rand.nextInt(11) +10  ;
-                this.pos = new Point2D();
+                //this.pos = new Point2D();
                 break;
             case 4:
                 this.degAtt = rand.nextInt(21) +50  ;
                 this.ptPar = 0 ;
                 this.pageAtt =rand.nextInt(11) +60  ;
                 this.pagePar = rand.nextInt(11) +10  ;
-                this.pos = new Point2D(); 
+                //this.pos = new Point2D(); 
                 break;
             case 5:
                 this.degAtt = rand.nextInt(11) +20  ;
                 this.ptPar = 0 ;
                 this.pageAtt =rand.nextInt(11) +60  ;
                 this.pagePar = rand.nextInt(11) +10  ;
-                this.pos = new Point2D();   
+                //this.pos = new Point2D();   
                 break; 
                 
         }

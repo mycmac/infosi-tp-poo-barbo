@@ -62,7 +62,7 @@ public class TestWoE {
     // jeu 
     Creature lk; // On est obligé de définir lk avant la boucle while car on ne peut pas la créer à chaque tour
     while((!w.liste_creatures.isEmpty()) || j.getPersonnage().getPtVie()>0){// le jeu continue tant qu'il reste des monstres et tant que le joueur n'est pas mort 
-        System.out.println("voici la liste des créature autour de vous :");
+        System.out.println("Les créatures ont bougé, voici les créatures prochent de vous :");
         j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage());
         System.out.println("que voulez-vous faire ? ");       
         System.out.println("1 : attaque(archer) ; 2 : attaque(guerrier) ; 3 : déplacement "    );
@@ -85,7 +85,7 @@ public class TestWoE {
             case 2 :
                 System.out.println("voici la liste des creatures que vous pouvez attaquer");
                 j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage()); // permet d'afficher le nom des personnages à moins de 5 cases 
-                System.out.println("Vveuillez choisir votre cible");                
+                System.out.println("Veuillez choisir votre cible");                
                 scanner.nextLine();  // Consomme la ligne vide restante après l'entrée de l'int
                 String nom2 = scanner.nextLine();
                 try { lk= j.getPersonnage().retournecrea(nom2,w.liste_creatures); // permet de renvoyer la créature que le joueur a choisit à partir du nom 
