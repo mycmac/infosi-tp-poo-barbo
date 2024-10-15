@@ -64,7 +64,7 @@ public class TestWoE {
     while((!w.liste_creatures.isEmpty()) || j.getPersonnage().getPtVie()>0){// le jeu continue tant qu'il reste des monstres et tant que le joueur n'est pas mort 
         System.out.println("voici la liste des créature autour de vous :");
         j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage());
-        System.out.println("que voulez-vous faire");       
+        System.out.println("que voulez-vous faire ? ");       
         System.out.println("1 : attaque(archer) ; 2 : attaque(guerrier) ; 3 : déplacement "    );
         Scanner scanner = new Scanner(System.in);
         int choix = scanner.nextInt();

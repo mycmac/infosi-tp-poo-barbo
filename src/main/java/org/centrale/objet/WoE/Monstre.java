@@ -42,7 +42,7 @@ public abstract class Monstre extends Creature {
         int dx = rand.nextInt(3) - 1;
         int dy = rand.nextInt(3) - 1;
         pos.translate(dx, dy);
-        System.out.println("Monstre déplacé à la position : " + pos);
+        //System.out.println("Monstre déplacé à la position : " + pos);
     }
 
     @Override
