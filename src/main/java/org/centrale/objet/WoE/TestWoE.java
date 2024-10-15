@@ -58,16 +58,43 @@ public class TestWoE {
     frame.pack();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Méthode spécifique à JFrame
     frame.setVisible(true);
+    
+    // jeu 
+    Creature lk; // On est obligé de définir lk avant la boucle while car on ne peut pas la créer à chaque tour
     while((!w.liste_creatures.isEmpty()) || j.getPersonnage().getPtVie()>0){// le jeu continue tant qu'il reste des monstres et tant que le joueur n'est pas mort 
+        System.out.println("voici la liste des créature autour de vous :");
+        j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage());
+        System.out.println("que voulez-vous faire");       
         System.out.println("1 : attaque(archer) ; 2 : attaque(guerrier) ; 3 : déplacement "    );
         Scanner scanner = new Scanner(System.in);
         int choix = scanner.nextInt();
         switch(choix){
+            
             case 1 : 
-                combattre // il faut avoir le nom de la créature 
-                  
+                j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage()); // permet d'afficher le nom des personnages à moins de 5 cases 
+                scanner.nextLine();  // Consomme la ligne vide restante après l'entrée de l'int
+                String nom1 = scanner.nextLine();
+                try { lk= j.getPersonnage().retournecrea(nom1,w.liste_creatures); // permet de renvoyer la créature que le joueur a choisit à partir du nom 
+                     j.getPersonnage().combattre(lk); // combattre la créature que le joueur à choisit. 
+                } catch (Exception e) {
+                            System.out.println("La creature n'a pas été trouvé, il faut mettre les majuscules");
+                    }                
+            case 2 :
+                j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage()); // permet d'afficher le nom des personnages à moins de 5 cases 
+                scanner.nextLine();  // Consomme la ligne vide restante après l'entrée de l'int
+                String nom2 = scanner.nextLine();
+                try { lk= j.getPersonnage().retournecrea(nom2,w.liste_creatures); // permet de renvoyer la créature que le joueur a choisit à partir du nom 
+                     j.getPersonnage().combattre(lk); // combattre la créature que le joueur à choisit. 
+                } catch (Exception e) {
+                            System.out.println("La creature n'a pas été trouvé, il faut mettre les majuscules");
+                    }               
+                
             case 3 : 
+                System.out.println("Votre position actuel est : "+j.getPersonnage().getPos());
                 j.deplacement_joueur(w.liste_creatures);
     }
+            j.vider_jeu(w.liste_creatures);// permet d'enlever les créatures qui ont plus de vie ;
+            j.getPersonnage().deplacemonstre(w.liste_creatures); // permet de déplacer toutes les créature à chaque tours
+}
 }
 }

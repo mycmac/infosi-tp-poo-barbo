@@ -69,5 +69,12 @@ public class Joueur {
         }
         this.personnage.getPos().setX(position_act.get(0));
         this.personnage.getPos().setX(position_act.get(1));   
-    } 
+    }
+    public void vider_jeu(ArrayList<Creature> a){
+       for(int i = a.size() - 1; i >= 0; i--){
+            if(a.get(i).getPtVie()< 0){
+                 a.remove(i);
+            }
+        }        
+    }
 }

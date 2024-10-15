@@ -19,10 +19,13 @@ public class World {
     ArrayList<Objet> liste_objets = new ArrayList<>();
     
     
-
+    /*
+    on veut créer un monde avec 20archers, 20 paysans.... 
+    chaque fonction a.crea_... permet d'ajouter 20 créature du type demandé a la liste créature. 
+    */
 
     public void creation(){
-        
+        //
         Archer a = new Archer() ;
         a.crea_archer(liste_creatures) ;
         
