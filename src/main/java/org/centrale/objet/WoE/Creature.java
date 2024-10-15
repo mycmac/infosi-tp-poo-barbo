@@ -250,8 +250,9 @@ public abstract class Creature implements deplacable {
     public void affiche_monstre(ArrayList<Creature> a, Personnage crea){
         for(int i=0; i<a.size();i++){
             if(a.get(i).getPos().distanceTo(crea.getPos())<=crea.getDistAttMax()){
-                System.out.println(a.get(i).getNom());
                 System.out.print(a.get(i).getPos());
+                System.out.println(a.get(i).getNom());
+
             }
         }
     }

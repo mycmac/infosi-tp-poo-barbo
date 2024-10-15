@@ -7,7 +7,7 @@ import java.util.List;
 public class JeuGrille extends JPanel {
 
     private final int TAILLE_CASE = 20;  // Taille d'une case dans la grille
-    private final int TAILLE_GRILLE = 50; // Taille de la grille (50x50)
+    private final int TAILLE_GRILLE = 51; // Taille de la grille (50x50)
     private Personnage personnage; // Ton personnage principal
     private List<Creature> creatures; // Liste des créatures (ex : archers)
 

@@ -71,30 +71,38 @@ public class TestWoE {
         switch(choix){
             
             case 1 : 
+                System.out.println("voici la liste des creatures que vous pouvez attaquer");
                 j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage()); // permet d'afficher le nom des personnages à moins de 5 cases 
+                System.out.println("Veuillez choisir voter cible");
                 scanner.nextLine();  // Consomme la ligne vide restante après l'entrée de l'int
                 String nom1 = scanner.nextLine();
                 try { lk= j.getPersonnage().retournecrea(nom1,w.liste_creatures); // permet de renvoyer la créature que le joueur a choisit à partir du nom 
                      j.getPersonnage().combattre(lk); // combattre la créature que le joueur à choisit. 
                 } catch (Exception e) {
                             System.out.println("La creature n'a pas été trouvé, il faut mettre les majuscules");
-                    }                
+                    }
+                break; 
             case 2 :
+                System.out.println("voici la liste des creatures que vous pouvez attaquer");
                 j.getPersonnage().affiche_monstre(w.liste_creatures,j.getPersonnage()); // permet d'afficher le nom des personnages à moins de 5 cases 
+                System.out.println("Vveuillez choisir votre cible");                
                 scanner.nextLine();  // Consomme la ligne vide restante après l'entrée de l'int
                 String nom2 = scanner.nextLine();
                 try { lk= j.getPersonnage().retournecrea(nom2,w.liste_creatures); // permet de renvoyer la créature que le joueur a choisit à partir du nom 
                      j.getPersonnage().combattre(lk); // combattre la créature que le joueur à choisit. 
                 } catch (Exception e) {
                             System.out.println("La creature n'a pas été trouvé, il faut mettre les majuscules");
-                    }               
+                    }
+                break; 
                 
             case 3 : 
                 System.out.println("Votre position actuel est : "+j.getPersonnage().getPos());
                 j.deplacement_joueur(w.liste_creatures);
+                break; 
     }
             j.vider_jeu(w.liste_creatures);// permet d'enlever les créatures qui ont plus de vie ;
             j.getPersonnage().deplacemonstre(w.liste_creatures); // permet de déplacer toutes les créature à chaque tours
+            jeuGrille.mettreAJourGrille(j.getPersonnage(),w.liste_creatures);
 }
 }
 }
