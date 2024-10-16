@@ -1,15 +1,52 @@
 package org.centrale.objet.WoE;
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * Classe abstraite représentant une créature dans le jeu. 
+ * Chaque créature a des points de vie, des capacités d'attaque et de parade, ainsi qu'une position dans l'espace.
+ */
 public abstract class Creature implements deplacable {
-    protected int ptVie; // Points de vie
-    protected String nom ; // Nom
-    protected int degAtt;  // Dégâts d'attaque
-    protected int ptPar;  // Points de parade
-    protected int pageAtt;  // Page d'attaque
-    protected int pagePar;  // Page de parade
-    protected Point2D pos;  // Position de la créature
+    /**
+     * Points de vie de la créature.
+     * La créature perd des points de vie lorsqu'elle subit des attaques.
+     */
+    protected int ptVie; 
+
+    /**
+     * Nom de la créature.
+     * Sert à identifier la créature dans le jeu.
+     */
+    protected String nom; 
+
+    /**
+     * Dégâts d'attaque de la créature.
+     * Représente la force de l'attaque de la créature lorsqu'elle combat une autre créature.
+     */
+    protected int degAtt;
+
+    /**
+     * Points de parade de la créature.
+     * Représente la capacité de la créature à se défendre contre les attaques ennemies.
+     */
+    protected int ptPar;  
+
+    /**
+     * Page d'attaque de la créature.
+     * Représente la vitesse avec laquelle la créature peut attaquer dans un tour de jeu.
+     */
+    protected int pageAtt;  
+
+    /**
+     * Page de parade de la créature.
+     * Représente la vitesse avec laquelle la créature peut se défendre dans un tour de jeu.
+     */
+    protected int pagePar;  
+
+    /**
+     * Position de la créature dans l'espace de jeu.
+     * Représente la position de la créature sur la grille de jeu.
+     */
+    protected Point2D pos; 
 
     /**
      * Constructeur avec paramètres pour créer une créature.
@@ -22,6 +59,9 @@ public abstract class Creature implements deplacable {
      * @param pos Position de la créature
      */
     public Creature(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos) {
+            /**
+            * Points de vie de la créature.
+            */
         this.ptVie = ptVie;
         this.degAtt = degAtt;
         this.ptPar = ptPar;
@@ -56,7 +96,7 @@ public abstract class Creature implements deplacable {
         this.pos = new Point2D();
     }
     /**
- * Permet de créer un personage avec les valeurs qui lui corresponde
+ * Permet de créer un personage avec les caractétistiques qui lui correspondent
  *
  * @param 1 archer 
  * @param 2 Guerrier
@@ -210,12 +250,24 @@ public abstract class Creature implements deplacable {
         System.out.println("Creature{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar
                 + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + '}');
     }
+        /**
+     * Récupère des points de vie. Le total ne doit pas dépasser 100.
+     *
+     * @param point Le nombre de points à récupérer.
+     */
     public void recuperePointDeVie(int point){
         this.ptVie= this.ptVie+point; 
         if (this.ptVie> 100){
             this.ptVie=100;// un personnage ne peut pas avoir plus de 100 point de vie
         }
     }
+    
+    /**
+     * Renvoie la position de la créature sous forme de liste.
+     *
+     * @param crea La créature dont on souhaite la position.
+     * @return Une liste d'entiers représentant la position (x, y).
+     */
     public ArrayList<Integer> retourpos(Creature crea){ // met la position sous forme de vecteur 
         ArrayList<Integer> a= new ArrayList<>();
         a.add(crea.getPos().getX());
@@ -223,6 +275,16 @@ public abstract class Creature implements deplacable {
         return a; 
         
     }
+    /**
+ * Déplace la créature vers une case libre (non occupée).
+ * 
+ * Cette méthode tente de déplacer la créature vers une nouvelle position. 
+ * Elle prend en compte la liste des autres créatures pour s'assurer que 
+ * la position cible n'est pas déjà occupée.
+ *
+ * @param crea La créature à déplacer.
+ * @param a La liste des autres créatures pour vérifier la disponibilité des cases.
+ */
     public void dplt_case_libre(Creature crea, ArrayList<Creature> a){
         ArrayList<ArrayList<Integer >> position_crea = new ArrayList<>();
         ArrayList<Integer> position_act= new ArrayList<>();
@@ -249,7 +311,16 @@ public abstract class Creature implements deplacable {
             
         }while(position_crea.contains(position_act) || (crea.getPos().getX()< 0) || (crea.getPos().getY()< 0)|| (crea.getPos().getX()>50) || (crea.getPos().getY()> 50 ) );
     }
-    
+    /**
+ * Affiche les informations des créatures à portée d'attaque du personnage.
+ *
+ * Cette méthode parcourt la liste des créatures et vérifie si elles se trouvent 
+ * à une distance inférieure ou égale à la distance d'attaque maximale du personnage.
+ * Si c'est le cas, elle affiche la position et le nom de ces créatures.
+ *
+ * @param a La liste des créatures dans l'environnement.
+ * @param crea Le personnage dont on vérifie la portée d'attaque.
+ */
     public void affiche_monstre(ArrayList<Creature> a, Personnage crea){
         for(int i=0; i<a.size();i++){
             if(a.get(i).getPos().distanceTo(crea.getPos())<=crea.getDistAttMax()){
@@ -259,6 +330,17 @@ public abstract class Creature implements deplacable {
             }
         }
     }
+    /**
+ * Recherche une créature par son nom dans une liste de créatures.
+ *
+ * Cette méthode parcourt la liste des créatures et retourne celle qui a le même nom
+ * que le nom fourni en paramètre. Si aucune créature avec ce nom n'est trouvée,
+ * elle retourne `null`.
+ *
+ * @param nom Le nom de la créature à rechercher.
+ * @param a La liste des créatures dans l'environnement.
+ * @return La créature correspondante au nom, ou `null` si elle n'est pas trouvée.
+ */
     public Creature retournecrea(String nom,ArrayList<Creature> a){
         for(int i=0; i<a.size();i++){
             if(a.get(i).getNom().equals(nom)){
@@ -267,6 +349,16 @@ public abstract class Creature implements deplacable {
         }
         return null;
     }
+    /**
+ * Déplace tous les monstres dans la liste de créatures en utilisant la méthode
+ * de déplacement `dplt_case_libre`.
+ *
+ * Cette méthode parcourt la liste de créatures (monstres) et pour chaque monstre,
+ * elle appelle la fonction `dplt_case_libre` pour déplacer le monstre dans une
+ * case vide de l'environnement (sans chevaucher une autre créature et à l'intérieur des limites).
+ * 
+ * @param a La liste des créatures (monstres) à déplacer.
+ */
     public void deplacemonstre(ArrayList<Creature> a){
         for(int i=0; i<a.size();i++){
             dplt_case_libre(a.get(i),  a);
