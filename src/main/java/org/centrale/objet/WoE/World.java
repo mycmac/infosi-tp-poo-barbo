@@ -7,61 +7,63 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class World {
-    /*private Lapin bugs1= new Lapin();
-    private Lapin bugs2= new Lapin();
-    private Archer robin=new Archer();
-    private Paysan peon= new Paysan();
-    private Archer guillaumeT = new Archer() ;
-    //private Guerrier grosBill = new Guerrier();
-    //private Loup wolfie = new Wolfie();
+    /* Déclaration de créatures mais commentées
+    private Lapin bugs1 = new Lapin();  // Déclaration d'un Lapin nommé bugs1
+    private Lapin bugs2 = new Lapin();  // Déclaration d'un Lapin nommé bugs2
+    private Archer robin = new Archer();  // Déclaration d'un Archer nommé robin
+    private Paysan peon = new Paysan();  // Déclaration d'un Paysan nommé peon
+    private Archer guillaumeT = new Archer();  // Déclaration d'un Archer nommé guillaumeT
+    //private Guerrier grosBill = new Guerrier();  // Déclaration d'un Guerrier (commenté)
+    //private Loup wolfie = new Wolfie();  // Déclaration d'un Loup (commenté)
     */
-    ArrayList<Creature> liste_creatures = new ArrayList<>(); 
-    ArrayList<Objet> liste_objets = new ArrayList<>();
     
-    
+    // Liste des créatures et des objets présents dans le monde
+    ArrayList<Creature> liste_creatures = new ArrayList<>();  // Liste des créatures
+    ArrayList<Objet> liste_objets = new ArrayList<>();  // Liste des objets
+
     /*
-    on veut créer un monde avec 20archers, 20 paysans.... 
-    chaque fonction a.crea_... permet d'ajouter 20 créature du type demandé a la liste créature. 
+    La méthode 'creation' permet de créer un certain nombre d'archers, de paysans, de guerriers, etc.
+    Chaque fonction a.crea_... permet d'ajouter des créatures ou des objets dans les listes respectives.
     */
 
     public void creation(){
-        //
-        Archer a = new Archer() ;
-        a.crea_archer(liste_creatures) ;
+        // Création et ajout des créatures à la liste 'liste_creatures'
+        Archer a = new Archer();  // Création d'un nouvel Archer
+        a.crea_archer(liste_creatures);  // Ajout de 20 archers à la liste des créatures
         
+        Guerrier g = new Guerrier();  // Création d'un nouveau Guerrier
+        g.crea_guerrier(liste_creatures);  // Ajout de 20 guerriers à la liste des créatures
         
-        Guerrier g = new Guerrier();
-        g.crea_guerrier(liste_creatures);
+        Paysan p = new Paysan();  // Création d'un nouveau Paysan
+        p.crea_paysan(liste_creatures);  // Ajout de 20 paysans à la liste des créatures
         
-        Paysan p = new Paysan();
-        p.crea_paysan(liste_creatures);
+        Loup l = new Loup();  // Création d'un nouveau Loup
+        l.crea_loup(liste_creatures);  // Ajout de 20 loups à la liste des créatures
         
-        Loup l = new Loup();
-        l.crea_loup(liste_creatures);
+        Lapin lap = new Lapin();  // Création d'un nouveau Lapin
+        lap.crea_lapin(liste_creatures);  // Ajout de 20 lapins à la liste des créatures
         
-        Lapin lap = new Lapin();
-        lap.crea_lapin(liste_creatures);
+        // Création et ajout des objets à la liste 'liste_objets'
+        Epee e = new Epee();  // Création d'une nouvelle épée
+        e.crea_epee(liste_objets);  // Ajout de 20 épées à la liste des objets
         
-        Epee e = new Epee();
-        e.crea_epee(liste_objets);
+        PotionSoin pot = new PotionSoin();  // Création d'une nouvelle potion de soin
+        pot.crea_potion_soin(liste_objets);  // Ajout de 20 potions de soin à la liste des objets
         
-        PotionSoin pot = new PotionSoin();
-        pot.crea_potion_soin(liste_objets);
-        
+        // Commenté: Code qui additionne les points de vie de toutes les créatures et les affiche
 //        int longueur = liste_creatures.size();
-//        int pvTotal= 0; 
-//        for (int i =0; i<longueur; i++ ){
-//            pvTotal = pvTotal + liste_creatures.get(i).getPtVie() ; 
+//        int pvTotal = 0; 
+//        for (int i = 0; i < longueur; i++) {
+//            pvTotal = pvTotal + liste_creatures.get(i).getPtVie();  // Additionne les points de vie des créatures
 //        }
-        for (int i=0; i< liste_creatures.size();i++){
-           System.out.println("Position " + liste_creatures.get(i).getNom() + liste_creatures.get(i).getPos() ); 
+        
+        // Affichage des positions de toutes les créatures
+        for (int i = 0; i < liste_creatures.size(); i++) {
+            System.out.println("Position " + liste_creatures.get(i).getNom() + liste_creatures.get(i).getPos());  // Affiche le nom et la position de chaque créature
         }
-
-
-        
-        
     }
 }
+
 
     
 

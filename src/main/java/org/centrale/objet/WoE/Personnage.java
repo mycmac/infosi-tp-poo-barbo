@@ -3,46 +3,46 @@ package org.centrale.objet.WoE;
 import java.util.Random;
 
 public abstract class Personnage extends Creature {
-    private int distAttMax;
+    private int distAttMax;  // Distance d'attaque maximale pour le personnage
 
     // Constructeur par défaut
     public Personnage() {
         super();  // Appel au constructeur par défaut de Creature
-        this.nom = null;
-        this.distAttMax = 0;
+        this.nom = null;  // Nom non défini par défaut
+        this.distAttMax = 0;  // Distance d'attaque maximale par défaut
     }
 
-    // Constructeur avec paramètres
+    // Constructeur avec paramètres pour initialiser un personnage avec des caractéristiques
     public Personnage(String n, int pV, int dA, int pPar, int paAtt, int paPar, int distAttMax, Point2D p) {
         super(pV, dA, pPar, paAtt, paPar, p);  // Appel au constructeur de Creature
-        this.nom = n;
-        this.distAttMax = distAttMax;
+        this.nom = n;  // Initialisation du nom du personnage
+        this.distAttMax = distAttMax;  // Initialisation de la distance d'attaque maximale
     }
-    public Personnage(int a){
-        super(a);
-        switch (a){
-            case 1 : 
-                this.distAttMax = 5; 
-                break;
-            case 2 : 
-                 this.distAttMax = 1;
-                 break;
-                  
-            case 3 :                 
-                this.distAttMax = 0;
-                break;
 
+    // Constructeur avec un paramètre entier (probablement pour définir certains attributs par défaut)
+    public Personnage(int a) {
+        super(a);  // Appel du constructeur de Creature avec un entier
+        switch (a) {
+            case 1: 
+                this.distAttMax = 5;  // Si a est 1, la distance d'attaque maximale est 5
+                break;
+            case 2: 
+                this.distAttMax = 1;  // Si a est 2, la distance d'attaque maximale est 1
+                break;
+            case 3:                 
+                this.distAttMax = 0;  // Si a est 3, la distance d'attaque maximale est 0
+                break;
         }
     }
 
-    // Constructeur de copie
+    // Constructeur de copie pour créer une copie d'un personnage existant
     public Personnage(Personnage pers) {
-        super(pers);  // Appel au constructeur de copie de Creature
-        this.nom = pers.nom;
-        this.distAttMax = pers.distAttMax;
+        super(pers);  // Appel du constructeur de copie de Creature
+        this.nom = pers.nom;  // Copie le nom du personnage
+        this.distAttMax = pers.distAttMax;  // Copie la distance d'attaque maximale
     }
 
-    // Accesseurs et mutateurs pour les attributs spécifiques à Personnage
+    // Accesseurs et mutateurs pour l'attribut distAttMax
 
     public int getDistAttMax() {
         return distAttMax;
@@ -52,33 +52,17 @@ public abstract class Personnage extends Creature {
         this.distAttMax = distAttMax;
     }
 
-    /*@Override
-    public void deplace() {
-        Random rand = new Random();
-        // Générer des déplacements aléatoires sur l'axe X et Y
-        int dx = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
-        int dy = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
-
-        // Déplacer le personnage en ajoutant dx et dy à sa position actuelle
-        pos.translate(dx, dy);
-
-        System.out.println("Personnage déplacé à la position : " + pos);
-    }
-*/
+    // Méthode pour afficher les informations du personnage
     @Override
     public void affiche() {
         System.out.println("Nom :" + nom + ", " + "Point de vie "+ ptVie + ", "+degAtt+ ", "+ ptPar + ", "+ pageAtt +", " + distAttMax + ", " + "Position :"+ pos);
     }
-    
-/*    
-    @Override
-    public float distance(Point2D p){
-        return (float) Math.sqrt(Math.pow(p.getY() - this.pos.getY(), 2) + Math.pow(p.getX() - this.pos.getX(), 2));
-    }
-*/
+
+    // Méthode de combat qui n'est pas encore implémentée pour les personnages
     @Override
     public void combattre(Creature c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");  // Lancer une exception car le combat n'est pas implémenté pour cette classe
     }
 
 }
+

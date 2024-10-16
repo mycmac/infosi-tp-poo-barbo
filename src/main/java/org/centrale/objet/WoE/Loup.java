@@ -8,28 +8,34 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
+ * Classe Loup héritant de Monstre et implémentant l'interface Combattant.
+ * Représente un loup dans le jeu, capable de se déplacer et d'attaquer des créatures.
+ * 
  * @author PRO
  */
 public class Loup extends Monstre implements Combattant {
-    
-    public Loup(String n, int ptVie, int degAtt,int ptPar, int pageAtt,int pagePar, Point2D pos){
-        super(n,ptVie,degAtt, ptPar, pageAtt,pagePar, pos);
+
+    // Constructeur avec des paramètres spécifiques pour initialiser les attributs du Loup
+    public Loup(String n, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos) {
+        super(n, ptVie, degAtt, ptPar, pageAtt, pagePar, pos);
     }
     
-    public Loup(Loup l){
+    // Constructeur de copie (copy constructor)
+    public Loup(Loup l) {
         super(l);
     }
     
-    public Loup(){
+    // Constructeur par défaut
+    public Loup() {
         super();
-    } 
-    public Loup(int a){
-        super(a);
     }
     
- 
+    // Constructeur avec un paramètre pour initialiser la vie du loup
+    public Loup(int a) {
+        super(a);
+    }
 
+    // Getters pour accéder aux attributs du loup
     public int getPtVie() {
         return ptVie;
     }
@@ -54,6 +60,7 @@ public class Loup extends Monstre implements Combattant {
         return pos;
     }
 
+    // Setters pour modifier les attributs du loup
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
@@ -78,44 +85,54 @@ public class Loup extends Monstre implements Combattant {
         this.pos = pos;
     }
     
-    
+    /**
+     * Méthode pour faire combattre le loup contre une autre créature.
+     * Le combat est au corps à corps si la distance entre le loup et la créature est 1.
+     * 
+     * @param c La créature contre laquelle le loup va combattre.
+     */
     @Override
     public void combattre(Creature c) {
-    Random rand = new Random();
-    double distance = this.pos.distanceTo(c.getPos());
+        Random rand = new Random();
+        double distance = this.pos.distanceTo(c.getPos());  // Calcul de la distance entre le loup et la créature
 
-    if (distance == 1) {  // Combat au corps à corps (proche)
-        int jetAttaque = rand.nextInt(100) + 1;
-        if (jetAttaque <= this.pageAtt) {  // Loup réussit son attaque
-            System.out.println("Le loup attaque " + c.getNom() + " avec succès !");
-            int jetParade = rand.nextInt(100) + 1;
-            if (jetParade <= c.getPagePar()) {  // Parade réussie
-                int degats = this.degAtt - c.getPtPar();
-                degats = Math.max(degats, 0);  // Évite les dégâts négatifs
-                c.setPtVie(c.getPtVie() - degats);
-                System.out.println(c.getNom() + " a paré l'attaque ! Il lui reste " + c.getPtVie() + " points de vie.");
-            } else {  // Parade échouée
-                c.setPtVie(c.getPtVie() - this.degAtt);
-                System.out.println(c.getNom() + " n'a pas paré ! Il lui reste " + c.getPtVie() + " points de vie.");
+        if (distance == 1) {  // Si la distance est égale à 1, on peut attaquer
+            int jetAttaque = rand.nextInt(100) + 1;  // Jet d'attaque du loup
+            if (jetAttaque <= this.pageAtt) {  // Si l'attaque réussit
+                System.out.println("Le loup attaque " + c.getNom() + " avec succès !");
+                int jetParade = rand.nextInt(100) + 1;  // Jet de parade de la créature
+                if (jetParade <= c.getPagePar()) {  // Si la créature parvient à parer l'attaque
+                    int degats = this.degAtt - c.getPtPar();  // Calcul des dégâts après la parade
+                    degats = Math.max(degats, 0);  // Les dégâts ne peuvent pas être négatifs
+                    c.setPtVie(c.getPtVie() - degats);  // La créature perd des points de vie
+                    System.out.println(c.getNom() + " a paré l'attaque ! Il lui reste " + c.getPtVie() + " points de vie.");
+                } else {  // Si la parade échoue
+                    c.setPtVie(c.getPtVie() - this.degAtt);  // La créature perd les points de vie directement
+                    System.out.println(c.getNom() + " n'a pas paré ! Il lui reste " + c.getPtVie() + " points de vie.");
+                }
+            } else {
+                System.out.println("Le loup rate son attaque contre " + c.getNom() + ".");
             }
         } else {
-            System.out.println("Le loup rate son attaque contre " + c.getNom() + ".");
+            System.out.println("Le loup est trop loin pour attaquer.");  // Si le loup est trop loin pour attaquer
         }
-    } else {
-        System.out.println("Le loup est trop loin pour attaquer.");
     }
-}
-    public void  crea_loup(ArrayList<Creature> a){
-    Random random= new Random();
-    int alea = random.nextInt(100);
 
-    for (int i=0; i<20; i++ ){
-        String n = "Loup" + i;
-        Loup lo= new Loup(4);
-        lo.setNom(n);
-        lo.dplt_case_libre(lo,a);
-        a.add(lo);
-    }
+    /**
+     * Méthode pour créer des loups et les ajouter à une liste.
+     * Crée 20 loups et les place dans des positions libres sur la carte.
+     * 
+     * @param a La liste des créatures à ajouter les loups.
+     */
+    public void crea_loup(ArrayList<Creature> a) {
+        Random random = new Random();
+
+        for (int i = 0; i < 20; i++) {
+            String n = "Loup" + i;  // Nom du loup
+            Loup lo = new Loup(4);  // Crée un nouveau loup avec 4 points de vie
+            lo.setNom(n);  // Affecte un nom au loup
+            lo.dplt_case_libre(lo, a);  // Place le loup à une case libre
+            a.add(lo);  // Ajoute le loup à la liste des créatures
+        }
     } 
-
 }
