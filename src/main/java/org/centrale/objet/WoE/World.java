@@ -5,114 +5,30 @@
 package org.centrale.objet.WoE;
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.LinkedList;
 
 public class World {
-    /* Déclaration de créatures mais commentées
-    private Lapin bugs1 = new Lapin();  // Déclaration d'un Lapin nommé bugs1
-    private Lapin bugs2 = new Lapin();  // Déclaration d'un Lapin nommé bugs2
-    private Archer robin = new Archer();  // Déclaration d'un Archer nommé robin
-    private Paysan peon = new Paysan();  // Déclaration d'un Paysan nommé peon
-    private Archer guillaumeT = new Archer();  // Déclaration d'un Archer nommé guillaumeT
-    //private Guerrier grosBill = new Guerrier();  // Déclaration d'un Guerrier (commenté)
-    //private Loup wolfie = new Wolfie();  // Déclaration d'un Loup (commenté)
-    */
+    private Lapin bugs1= new Lapin();
+    private Lapin bugs2= new Lapin();
+    private Archer robin=new Archer();
+    private Paysan peon= new Paysan();
+    private Archer guillaumeT = new Archer() ;
+    public int total_pdv = 0 ;
+    //private Guerrier grosBill = new Guerrier();
+    //private Loup wolfie = new Wolfie();
     
-    // Liste des créatures et des objets présents dans le monde
-    ArrayList<Creature> liste_creatures = new ArrayList<>();  // Liste des créatures
-    ArrayList<Objet> liste_objets = new ArrayList<>();  // Liste des objets
-
-    /*
-    La méthode 'creation' permet de créer un certain nombre d'archers, de paysans, de guerriers, etc.
-    Chaque fonction a.crea_... permet d'ajouter des créatures ou des objets dans les listes respectives.
-    */
-
-    public void creation(){
-        // Création et ajout des créatures à la liste 'liste_creatures'
-        Archer a = new Archer();  // Création d'un nouvel Archer
-        a.crea_archer(liste_creatures);  // Ajout de 20 archers à la liste des créatures
+/*
+    
+    public World(){
         
-        Guerrier g = new Guerrier();  // Création d'un nouveau Guerrier
-        g.crea_guerrier(liste_creatures);  // Ajout de 20 guerriers à la liste des créatures
-        
-        Paysan p = new Paysan();  // Création d'un nouveau Paysan
-        p.crea_paysan(liste_creatures);  // Ajout de 20 paysans à la liste des créatures
-        
-        Loup l = new Loup();  // Création d'un nouveau Loup
-        l.crea_loup(liste_creatures);  // Ajout de 20 loups à la liste des créatures
-        
-        Lapin lap = new Lapin();  // Création d'un nouveau Lapin
-        lap.crea_lapin(liste_creatures);  // Ajout de 20 lapins à la liste des créatures
-        
-        // Création et ajout des objets à la liste 'liste_objets'
-        Epee e = new Epee();  // Création d'une nouvelle épée
-        e.crea_epee(liste_objets);  // Ajout de 20 épées à la liste des objets
-        
-        PotionSoin pot = new PotionSoin();  // Création d'une nouvelle potion de soin
-        pot.crea_potion_soin(liste_objets);  // Ajout de 20 potions de soin à la liste des objets
-        
-        // Commenté: Code qui additionne les points de vie de toutes les créatures et les affiche
-//        int longueur = liste_creatures.size();
-//        int pvTotal = 0; 
-//        for (int i = 0; i < longueur; i++) {
-//            pvTotal = pvTotal + liste_creatures.get(i).getPtVie();  // Additionne les points de vie des créatures
-//        }
-        
-        // Affichage des positions de toutes les créatures
-        for (int i = 0; i < liste_creatures.size(); i++) {
-            System.out.println("Position " + liste_creatures.get(i).getNom() + liste_creatures.get(i).getPos());  // Affiche le nom et la position de chaque créature
-        }
     }
-}
-
-
     
+    public void creerMondeAlea() {
+        
+        Random generateurAleatoire = new Random();  // Assurez-vous que vous avez un générateur aléatoire
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
         // Position du Lapin
         int xl = generateurAleatoire.nextInt(100);
         int yl = generateurAleatoire.nextInt(100);
@@ -188,7 +104,7 @@ public class World {
         //System.out.println("Position de bugs (Lapin) : " + bugs.getPos());
         System.out.println("Position de robin (Archer) : " + robin.getPos());
         //System.out.println("Position de peon (Paysan) : " + peon.getPos());
-        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());      
+        System.out.println("Position initiale de guillaumeT (Archer) : " + guillaumeT.getPos());        
     }
     public void tourdejeu(){
         
@@ -203,6 +119,79 @@ public class World {
         /*System.out.println("Position grosbill  : " + grosBill.getPos());
         System.out.println("Position wolfi : " + wolfie.getPos());
     }
-    */
+    
+    public ArrayList<Creature> liste_creatures = new ArrayList() ;
+    public ArrayList<Objet> liste_objets = new ArrayList() ;
+    public LinkedList<Creature> liste_creatures_lc = new LinkedList<>();
+    
+    
+    public void creation_lc(){
+        
 
+        Random rand = new Random();
 
+        // Créer des instances de tes créatures
+        Archer archer = new Archer();
+        Guerrier guerrier = new Guerrier();
+        Paysan paysan = new Paysan();
+        Loup loup = new Loup();
+        Lapin lapin = new Lapin();
+
+        // Associer chaque méthode à un numéro dans une Map
+        Map<Integer, Runnable> actions = new HashMap<>();
+        actions.put(1, () -> archer.crea_archer_lc(liste_creatures_lc));
+        actions.put(2, () -> guerrier.crea_guerrier_lc(liste_creatures_lc));
+        actions.put(3, () -> paysan.crea_paysan_lc(liste_creatures_lc));
+        actions.put(4, () -> loup.crea_loup_lc(liste_creatures_lc));
+        actions.put(5, () -> lapin.crea_lapin_lc(liste_creatures_lc));
+
+        // Boucle jusqu'à avoir 100 créatures dans la LinkedList
+        while (liste_creatures.size() != 100) {
+            int alea = rand.nextInt(5) + 1;  // Génère un nombre aléatoire entre 1 et 5
+            actions.get(alea).run();         // Exécute l'action correspondante
+        }
+    
+    }
+    
+    
+    
+    
+    public void creation(){
+        
+        Random rand = new Random();
+
+        // Création des instances des créatures
+        Archer archer = new Archer();
+        Guerrier guerrier = new Guerrier();
+        Paysan paysan = new Paysan();
+        Loup loup = new Loup();
+        Lapin lapin = new Lapin();
+
+        // Associer chaque méthode à un numéro dans une Map
+        Map<Integer, Runnable> actions = new HashMap<>();
+        actions.put(1, () -> archer.crea_archer(liste_creatures));
+        actions.put(2, () -> guerrier.crea_guerrier(liste_creatures));
+        actions.put(3, () -> paysan.crea_paysan(liste_creatures));
+        actions.put(4, () -> loup.crea_loup(liste_creatures));
+        actions.put(5, () -> lapin.crea_lapin(liste_creatures));
+        
+
+        // Boucle jusqu'à avoir 100 créatures
+        while (liste_creatures.size() != 100) {
+            int alea = rand.nextInt(5) + 1;  // Génère un nombre aléatoire entre 1 et 5
+            actions.get(alea).run();         // Exécute l'action correspondante
+        }
+        
+        
+        for (int i=0;i<liste_creatures.size();i++){
+            total_pdv = total_pdv + liste_creatures.get(i).getPtVie() ;
+        }
+        
+        System.out.println("Nombre total de points de vie des creatures : "+total_pdv) ;
+        
+        
+    }
+    
+
+*/     
+}

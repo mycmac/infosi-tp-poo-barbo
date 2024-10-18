@@ -1,52 +1,22 @@
 package org.centrale.objet.WoE;
+
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+
 /**
  * Classe abstraite représentant une créature dans le jeu. 
- * Chaque créature a des points de vie, des capacités d'attaque et de parade, ainsi qu'une position dans l'espace.
+ * Implémente l'interface Deplacable pour permettre aux créatures de se déplacer.
  */
-public abstract class Creature implements deplacable {
-    /**
-     * Points de vie de la créature.
-     * La créature perd des points de vie lorsqu'elle subit des attaques.
-     */
-    protected int ptVie; 
-
-    /**
-     * Nom de la créature.
-     * Sert à identifier la créature dans le jeu.
-     */
-    protected String nom; 
-
-    /**
-     * Dégâts d'attaque de la créature.
-     * Représente la force de l'attaque de la créature lorsqu'elle combat une autre créature.
-     */
-    protected int degAtt;
-
-    /**
-     * Points de parade de la créature.
-     * Représente la capacité de la créature à se défendre contre les attaques ennemies.
-     */
-    protected int ptPar;  
-
-    /**
-     * Page d'attaque de la créature.
-     * Représente la vitesse avec laquelle la créature peut attaquer dans un tour de jeu.
-     */
-    protected int pageAtt;  
-
-    /**
-     * Page de parade de la créature.
-     * Représente la vitesse avec laquelle la créature peut se défendre dans un tour de jeu.
-     */
-    protected int pagePar;  
-
-    /**
-     * Position de la créature dans l'espace de jeu.
-     * Représente la position de la créature sur la grille de jeu.
-     */
-    protected Point2D pos; 
+public abstract class Creature extends ElementDeJeu {
+    protected int ptVie; // Points de vie
+    protected String nom; // Nom
+    protected int degAtt;  // Dégâts d'attaque
+    protected int ptPar;  // Points de parade
+    protected int pageAtt;  // Page d'attaque
+    protected int pagePar;  // Page de parade
+    protected Point2D pos;  // Position de la créature
+    protected ArrayList<ObjetNumero> inventaire;
 
     /**
      * Constructeur avec paramètres pour créer une créature.
@@ -57,17 +27,16 @@ public abstract class Creature implements deplacable {
      * @param pageAtt Page d'attaque (vitesse d'attaque)
      * @param pagePar Page de parade (vitesse de parade)
      * @param pos Position de la créature
+     * @param inventaire Inventaire d'objets que possède la créature
      */
-    public Creature(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos) {
-            /**
-            * Points de vie de la créature.
-            */
+    public Creature(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos, ArrayList<ObjetNumero> inventaire) {
         this.ptVie = ptVie;
         this.degAtt = degAtt;
         this.ptPar = ptPar;
         this.pageAtt = pageAtt;
         this.pagePar = pagePar;
         this.pos = pos;
+        this.inventaire = inventaire;
     }
 
     /**
@@ -82,6 +51,7 @@ public abstract class Creature implements deplacable {
         this.pageAtt = c.pageAtt;
         this.pagePar = c.pagePar;
         this.pos = new Point2D(c.pos);  // Copie de la position
+        this.inventaire = c.inventaire;
     }
 
     /**
@@ -94,123 +64,146 @@ public abstract class Creature implements deplacable {
         this.pageAtt = 0;
         this.pagePar = 0;
         this.pos = new Point2D();
-    }
-    /**
- * Permet de créer un personage avec les caractétistiques qui lui correspondent
- *
- * @param 1 archer 
- * @param 2 Guerrier
- * @param 3 Paysan 
- * @param 4 Loup 
- * @param 5 Lapin
- */
-    public Creature(int a){   // cette fonction permeet de créer des personnage avec les proba 
-        Random rand = new Random();
-        this.ptVie = 100;
-        this.pos = new Point2D(); 
-        this.pos.setX(25);
-        this.pos.setY(25);
-        switch (a) {
-            case 1:
-                this.degAtt = rand.nextInt(21) +40  ;
-                this.ptPar = rand.nextInt(11) +30  ;
-                this.pageAtt =rand.nextInt(11) +60  ;
-                this.pagePar = rand.nextInt(11) +40  ;
-                //this.pos = new Point2D(); 
-                break;
-            case 2:
-                this.degAtt = rand.nextInt(21) +60  ;
-                this.ptPar = rand.nextInt(11) +30  ;
-                this.pageAtt =rand.nextInt(11) +70  ;
-                this.pagePar = rand.nextInt(11) +40  ;
-                //this.pos = new Point2D();
-                break;
-            case 3:
-                this.degAtt = 0 ;
-                this.ptPar = rand.nextInt(11) +30  ;
-                this.pageAtt =0  ;
-                this.pagePar = rand.nextInt(11) +10  ;
-                //this.pos = new Point2D();
-                break;
-            case 4:
-                this.degAtt = rand.nextInt(21) +50  ;
-                this.ptPar = 0 ;
-                this.pageAtt =rand.nextInt(11) +60  ;
-                this.pagePar = rand.nextInt(11) +10  ;
-                //this.pos = new Point2D(); 
-                break;
-            case 5:
-                this.degAtt = rand.nextInt(11) +20  ;
-                this.ptPar = 0 ;
-                this.pageAtt =rand.nextInt(11) +60  ;
-                this.pagePar = rand.nextInt(11) +10  ;
-                //this.pos = new Point2D();   
-                break; 
-                
-        }
-
+        this.inventaire = new ArrayList<>();
     }
 
     // Getters et Setters
+
+    /**
+     * Récupère les points de vie de la créature.
+     * @return Points de vie
+     */
     public int getPtVie() {
         return ptVie;
     }
 
+    /**
+     * Modifie les points de vie de la créature.
+     * @param ptVie Points de vie à attribuer
+     */
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
 
+    /**
+     * Modifie les points de vie de la créature avec une valeur aléatoire.
+     */
+    public void setPtVie() {
+        Random random = new Random();
+        int rand = random.nextInt(50)+50;
+        this.ptVie = rand;
+    }
+
+    /**
+     * Récupère les dégâts d'attaque de la créature.
+     * @return Dégâts d'attaque
+     */
     public int getDegAtt() {
         return degAtt;
     }
-    public void setPtVie(){
-        Random random = new Random();
-        int rand = random.nextInt(100);
-        this.ptVie = rand; 
-    }
 
+    /**
+     * Modifie les dégâts d'attaque de la créature.
+     * @param degAtt Dégâts d'attaque à attribuer
+     */
     public void setDegAtt(int degAtt) {
         this.degAtt = degAtt;
     }
 
+    /**
+     * Récupère les points de parade de la créature.
+     * @return Points de parade
+     */
     public int getPtPar() {
         return ptPar;
     }
 
+    /**
+     * Récupère le nom de la créature.
+     * @return Nom
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Modifie le nom de la créature.
+     * @param nom Nom à attribuer
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
+
+    /**
+     * Modifie les points de parade de la créature.
+     * @param ptPar Points de parade à attribuer
+     */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
 
+    /**
+     * Récupère la page d'attaque de la créature.
+     * @return Page d'attaque
+     */
     public int getPageAtt() {
         return pageAtt;
     }
 
+    /**
+     * Modifie la page d'attaque de la créature.
+     * @param pageAtt Page d'attaque à attribuer
+     */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
     }
 
+    /**
+     * Récupère la page de parade de la créature.
+     * @return Page de parade
+     */
     public int getPagePar() {
         return pagePar;
     }
 
+    /**
+     * Modifie la page de parade de la créature.
+     * @param pagePar Page de parade à attribuer
+     */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
     }
 
+    /**
+     * Récupère la position de la créature.
+     * @return Position
+     */
     public Point2D getPos() {
         return pos;
     }
 
+    /**
+     * Modifie la position de la créature.
+     * @param pos Position à attribuer
+     */
     public void setPos(Point2D pos) {
         this.pos = pos;
+    }
+
+    /**
+     * Récupère l'inventaire de la créature.
+     * @return Inventaire
+     */
+    public ArrayList<ObjetNumero> getInventaire() {
+        return inventaire;
+    }
+
+    /**
+     * Modifie l'inventaire de la créature.
+     * @param inventaire Inventaire à attribuer
+     */
+    public void setInventaire(ArrayList<ObjetNumero> inventaire) {
+        this.inventaire = inventaire;
     }
 
     /**
@@ -224,6 +217,25 @@ public abstract class Creature implements deplacable {
         int dy = p.getY() - this.pos.getY();
         return (float) Math.sqrt(dx * dx + dy * dy);
     }
+    
+    
+    /**
+     * Calcule la distance entre deux créatures donnés.
+     *
+     * @param c1 Première créature
+     * @param c2 Deuxième créature
+     * @return Distance en float
+     */
+    public float distance_crea(Creature c1, Creature c2) {
+        Point2D p1 = c1.getPos() ;
+        Point2D p2 = c2.getPos() ;
+        int x1 = p1.getX();
+        int x2 = p2.getX();
+        int y1 = p1.getY();
+        int y2 = p2.getY();
+        return (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    }
+    
 
     /**
      * Méthode abstraite pour le comportement de combat d'une créature.
@@ -240,8 +252,75 @@ public abstract class Creature implements deplacable {
         int dx = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
         int dy = rand.nextInt(3) - 1;  // Valeurs possibles : -1, 0, 1
         pos.translate(dx, dy);
-        //System.out.println("Creature déplacée à la position : " + pos);
     }
+
+    /**
+     * Déplace la créature de manière aléatoire dans un monde continu en 2D de type sphère (50x50).
+     * Si la créature dépasse la limite en x ou en y, elle réapparaît de l'autre côté du plateau.
+     *
+     * @param c La créature à déplacer.
+     */
+    public void deplace(Creature c) {
+        Random rand = new Random();
+        int deltaX = rand.nextBoolean() ? 1 : -1;
+        int deltaY = rand.nextBoolean() ? 1 : -1;
+        int currentX = c.getPos().getX();
+        int currentY = c.getPos().getY();
+        int newX = currentX + deltaX;
+        if (newX > 50) {
+            newX = 0;
+        } else if (newX < 0) {
+            newX = 50;
+        }
+        int newY = currentY + deltaY;
+        if (newY > 50) {
+            newY = 0;
+        } else if (newY < 0) {
+            newY = 50;
+        }
+        c.getPos().setX(newX);
+        c.getPos().setY(newY);
+    }
+
+    /**
+     * Déplace la créature tout en prenant en compte la mémoire des positions des autres créatures.
+     *
+     * @param creature La créature à déplacer.
+     * @param liste Liste des autres créatures.
+     * @param liste_objets Liste des objets sur le terrain.
+     */
+    public void deplace_memoire(Creature creature, ArrayList<Creature> liste, ArrayList<Objet> liste_objets) {
+        ArrayList<Point2D> positions = new ArrayList<>();
+        for (int i = 0; i < liste.size(); i++) {
+            positions.add(liste.get(i).getPos());
+        }
+        Point2D pos = creature.getPos();
+        while (positions.contains(pos)) {
+            deplace(creature);
+            pos = creature.getPos();
+        }
+        for (Objet obj : liste_objets) {
+            if (pos.equals(obj.getPos())) {
+                ObjetNumero inv = new ObjetNumero(obj, inventaire.size() + 1);
+                inventaire.add(inv);
+            }
+        }
+    }
+    
+    /**
+    * Renvoie la position de la créature sous forme de vecteur (liste d'entiers).
+    * Les coordonnées x et y de la position de la créature sont ajoutées à une liste.
+    *
+    * @param crea La créature dont la position est à retourner.
+    * @return Un ArrayList contenant la position de la créature sous forme de deux entiers (x, y).
+    */
+    public ArrayList<Integer> retourpos(Creature crea) {
+        ArrayList<Integer> a = new ArrayList<>();
+        a.add(crea.getPos().getX());
+        a.add(crea.getPos().getY());
+        return a;
+    }
+    
 
     /**
      * Affiche les informations de la créature.
@@ -250,119 +329,105 @@ public abstract class Creature implements deplacable {
         System.out.println("Creature{" + "ptVie=" + ptVie + ", degAtt=" + degAtt + ", ptPar=" + ptPar
                 + ", pageAtt=" + pageAtt + ", pagePar=" + pagePar + ", pos=" + pos + '}');
     }
-        /**
-     * Récupère des points de vie. Le total ne doit pas dépasser 100.
-     *
-     * @param point Le nombre de points à récupérer.
+
+    /**
+     * Ajoute des points de vie à la créature.
+     * @param point Points de vie à ajouter
      */
-    public void recuperePointDeVie(int point){
-        this.ptVie= this.ptVie+point; 
-        if (this.ptVie> 100){
-            this.ptVie=100;// un personnage ne peut pas avoir plus de 100 point de vie
+    public void recuperePointDeVie(int point) {
+        this.ptVie = this.ptVie + point;
+        if (this.ptVie > 100) {
+            this.ptVie = 100;  // un personnage ne peut pas avoir plus de 100 points de vie
+        }
+    }
+
+    /**
+     * Vérifie si la position de la créature est à l'intérieur de la zone occupée par d'autres créatures.
+     * 
+     * @param creature La créature à vérifier.
+     * @param liste Liste des autres créatures.
+     * @return true si la position est à l'intérieur, false sinon.
+     */
+    public boolean pos_interieur(Creature creature, ArrayList<Creature> liste) {
+        for (int i = 0; i < liste.size(); i++) {
+            if ((creature.getPos()).equals((liste.get(i).getPos()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+    * Permet à une créature d'utiliser un objet passé en paramètre.
+     * Applique les effets de l'objet (bonus et/ou malus) à la créature.
+     *
+     * @param obj L'objet à utiliser par la créature.
+     */
+    public void utiliser(Objet obj) {
+        // Vérifie le type de l'objet et applique les effets correspondants
+        switch (obj.getNom()) {
+            case "Champignon":
+                // Le Champignon fait perdre 50 points de vie mais augmente d'autres attributs
+                this.ptVie -= 50;
+                if (this.ptVie < 0) {
+                    this.ptVie = 0; // Les points de vie ne peuvent pas être négatifs
+                }
+               this.degAtt += 25;
+               this.pageAtt += 25;
+               this.pagePar += 25;
+               System.out.println("Vous avez utilisé un Champignon.\n Vous perdez 50 points de vie mais gagnez 25 points en dégâts d'attaque, vitesse d'attaque, et vitesse de parade.");
+               break;
+
+            case "PotionSoin":
+                // La PotionSoin restaure 50 points de vie
+                this.ptVie += 50;
+                if (this.ptVie > 100) {
+                    this.ptVie = 100; // Les points de vie ne peuvent pas dépasser 100
+                }
+                System.out.println("Vous avez utilisé une PotionSoin.\n Vous gagnez 50 points de vie.");
+                break;
+
+            case "Burger":
+                // Le Burger apporte 25 points de vie, mais diminue pageAtt et pagePar de 25 points
+               this.ptVie += 25;
+                   if (this.ptVie > 100) {
+                   this.ptVie = 100; // Les points de vie ne peuvent pas dépasser 100
+               }
+                this.pageAtt -= 25;
+                this.pagePar -= 25;
+                // Les attributs pageAtt et pagePar ne peuvent pas descendre en dessous de 0
+                if (this.pageAtt < 0) {
+                    this.pageAtt = 0;
+                }
+                if (this.pagePar < 0) {
+                    this.pagePar = 0;
+                }
+               System.out.println("Vous avez mangé un Burger.\n Vous gagnez 25 points de vie mais perdez 25 points d'attaque et de parade.");
+               break;
+
+            default:
+                System.out.println("Cet objet n'est pas utilisable.");
+                break;
         }
     }
     
     /**
-     * Renvoie la position de la créature sous forme de liste.
-     *
-     * @param crea La créature dont on souhaite la position.
-     * @return Une liste d'entiers représentant la position (x, y).
+     * Permet d'afficher l'inventaire de la créature.
      */
-    public ArrayList<Integer> retourpos(Creature crea){ // met la position sous forme de vecteur 
-        ArrayList<Integer> a= new ArrayList<>();
-        a.add(crea.getPos().getX());
-        a.add(crea.getPos().getY()); 
-        return a; 
-        
+    
+    public void affiche_inventaire(){
+        System.out.println(inventaire) ;
     }
+    
     /**
- * Déplace la créature vers une case libre (non occupée).
- * 
- * Cette méthode tente de déplacer la créature vers une nouvelle position. 
- * Elle prend en compte la liste des autres créatures pour s'assurer que 
- * la position cible n'est pas déjà occupée.
- *
- * @param crea La créature à déplacer.
- * @param a La liste des autres créatures pour vérifier la disponibilité des cases.
- */
-    public void dplt_case_libre(Creature crea, ArrayList<Creature> a){
-        ArrayList<ArrayList<Integer >> position_crea = new ArrayList<>();
-        ArrayList<Integer> position_act= new ArrayList<>();
-        for (int y=0; y < a.size();y++ ){    // créer un vecteur de poosition 
-            position_crea.add(retourpos(a.get(y)));       
-        } 
-        do{ 
-            crea.deplace();
-            if(crea.getPos().getX()< 0){ // evite d'avoir une boucle infinie on remet la position à 0 
-                crea.getPos().setX(0);
-            }
-            if(crea.getPos().getY()< 0){
-                crea.getPos().setY(0);
-            }
-            if(crea.getPos().getY() > 50 ){
-                crea.getPos().setY(50);
-            }
-            if(crea.getPos().getY()> 50){
-                crea.getPos().setY(50);
-            }
-            position_act = retourpos(crea);
-            
-         
-            
-        }while(position_crea.contains(position_act) || (crea.getPos().getX()< 0) || (crea.getPos().getY()< 0)|| (crea.getPos().getX()>50) || (crea.getPos().getY()> 50 ) );
+     * Retourne une chaîne de caractères représentant les attributs de l'archer
+     * pour la sauvegarde dans un fichier texte.
+     *
+     * @return String Les attributs de l'archer sous forme de texte.
+     */
+    public String getTexteSauvegarde() {
+        return "Archer;" + getNom() + ";" + getPos().getX() + ";" + getPos().getY() + ";"
+                + getPtVie() + ";" + getDegAtt() + ";" + getPageAtt() + ";" + getPagePar();
     }
-    /**
- * Affiche les informations des créatures à portée d'attaque du personnage.
- *
- * Cette méthode parcourt la liste des créatures et vérifie si elles se trouvent 
- * à une distance inférieure ou égale à la distance d'attaque maximale du personnage.
- * Si c'est le cas, elle affiche la position et le nom de ces créatures.
- *
- * @param a La liste des créatures dans l'environnement.
- * @param crea Le personnage dont on vérifie la portée d'attaque.
- */
-    public void affiche_monstre(ArrayList<Creature> a, Personnage crea){
-        for(int i=0; i<a.size();i++){
-            if(a.get(i).getPos().distanceTo(crea.getPos())<=crea.getDistAttMax()){
-                System.out.print(a.get(i).getPos());
-                System.out.println(a.get(i).getNom());
-
-            }
-        }
-    }
-    /**
- * Recherche une créature par son nom dans une liste de créatures.
- *
- * Cette méthode parcourt la liste des créatures et retourne celle qui a le même nom
- * que le nom fourni en paramètre. Si aucune créature avec ce nom n'est trouvée,
- * elle retourne `null`.
- *
- * @param nom Le nom de la créature à rechercher.
- * @param a La liste des créatures dans l'environnement.
- * @return La créature correspondante au nom, ou `null` si elle n'est pas trouvée.
- */
-    public Creature retournecrea(String nom,ArrayList<Creature> a){
-        for(int i=0; i<a.size();i++){
-            if(a.get(i).getNom().equals(nom)){
-                return a.get(i);
-            }
-        }
-        return null;
-    }
-    /**
- * Déplace tous les monstres dans la liste de créatures en utilisant la méthode
- * de déplacement `dplt_case_libre`.
- *
- * Cette méthode parcourt la liste de créatures (monstres) et pour chaque monstre,
- * elle appelle la fonction `dplt_case_libre` pour déplacer le monstre dans une
- * case vide de l'environnement (sans chevaucher une autre créature et à l'intérieur des limites).
- * 
- * @param a La liste des créatures (monstres) à déplacer.
- */
-    public void deplacemonstre(ArrayList<Creature> a){
-        for(int i=0; i<a.size();i++){
-            dplt_case_libre(a.get(i),  a);
-        }
-            
-    }
+    
 }

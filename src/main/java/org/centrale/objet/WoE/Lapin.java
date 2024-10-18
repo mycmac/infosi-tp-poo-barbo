@@ -1,61 +1,80 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 /**
- *
- * @author barbo
+ * Classe représentant un lapin, un type de monstre dans le jeu. 
+ * Le lapin hérite des attributs de base des monstres.
  */
 public class Lapin extends Monstre {
-    
+
     /**
-     * Constructeur de la classe Lapin avec des paramètres pour initialiser ses attributs
+     * Constructeur de la classe Lapin avec tous les paramètres.
+     * 
+     * @param n Nom du lapin.
+     * @param ptVie Points de vie du lapin.
+     * @param degAtt Dégâts d'attaque du lapin.
+     * @param ptPar Points de parade du lapin.
+     * @param pageAtt Page d'attaque (probabilité de réussir une attaque).
+     * @param pagePar Page de parade (probabilité de réussir une parade).
+     * @param pos Position du lapin sur la carte.
+     * @param inventaire Inventaire d'objets que possède le lapin.
      */
-    public Lapin(String n, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
-        super(n, ptVie, degAtt, ptPar, pageAtt, pagePar, pos);  // Appel au constructeur de la classe parent (Monstre)
+    public Lapin(String n, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos, ArrayList<ObjetNumero> inventaire) {
+        super(n, ptVie, degAtt, ptPar, pageAtt, pagePar, pos, inventaire);
     }
 
     /**
-     * Constructeur de copie pour créer une copie d'un Lapin existant
+     * Constructeur de copie pour créer un lapin à partir d'un autre lapin.
+     * 
+     * @param i Le lapin à copier.
      */
-    public Lapin(Lapin i){
-        super(i);  // Appel au constructeur de copie de la classe parent (Monstre)
-    }
-    
-    /**
-     * Constructeur sans paramètre pour créer un Lapin avec des valeurs par défaut
-     */
-    public Lapin(){
-        super();  // Appel au constructeur sans paramètre de la classe parent (Monstre)
+    public Lapin(Lapin i) {
+        super(i);
     }
 
     /**
-     * Constructeur qui prend un entier pour initialiser le Lapin avec un certain attribut
+     * Constructeur par défaut de la classe Lapin.
      */
-    public Lapin(int a){
-        super(a);  // Appel au constructeur de la classe parent (Monstre) avec un seul paramètre
-    }    
+    public Lapin() {
+        super();
+    }
+
+    /**
+     * Crée plusieurs lapins aléatoirement positionnés sur la carte 
+     * et les ajoute à la liste des créatures.
+     * 
+     * @param liste Liste des créatures présentes sur la carte.
+     * @param liste_objets Liste des objets présents sur la carte.
+     */
+    public void crea_lapin(ArrayList<Creature> liste, ArrayList<Objet> liste_objets) {
+        String n = "Lapin";
+        Lapin arch = new Lapin();
+        Random random = new Random() ;
+        int x = random.nextInt(50) ;
+        int y = random.nextInt(50) ;
+        Point2D pos = new Point2D(x,y) ;
+        arch.setPos(pos) ;
+        deplace_memoire(arch, liste, liste_objets);
+        arch.setNom(n);
+        arch.setPtVie();
+        liste.add(arch);
+        
+    }
     
     /**
-     * Méthode pour créer plusieurs Lapins et les ajouter à la liste 'a'
-     * Chaque Lapin est créé avec un nom unique et placé dans une position libre
+     * Retourne une chaîne de caractères représentant les attributs du lapin
+     * pour la sauvegarde dans un fichier texte.
+     *
+     * @return String Les attributs de l'archer sous forme de texte.
      */
-    public void crea_lapin(ArrayList<Creature> a){
-        Random random = new Random();  // Instance de Random pour générer des nombres aléatoires
-        int alea = random.nextInt(100);  // Génére un nombre aléatoire entre 0 et 99
+    
+    public String getTexteSauvegarde() {
+        return "Lapin;" + getNom() + ";" + getPos().getX() + ";" + getPos().getY() + ";"
+                + getPtVie() + ";" + getDegAtt() + ";" + getPageAtt() + ";" + getPagePar();
+    }
 
-        // Crée 20 Lapins et les ajoute à la liste de créatures 'a'
-        for (int i = 0; i < 20; i++ ){
-            String n = "Lapin" + i;  // Nom du Lapin
-            Lapin la = new Lapin(5);  // Création d'un nouveau Lapin avec un paramètre (ici, probablement la force)
-            la.setNom(n);  // Définir le nom du Lapin
-            la.dplt_case_libre(la, a);  // Placer le Lapin dans une case libre
-            a.add(la);  // Ajouter le Lapin à la liste de créatures
-        }
-    } 
+
 }

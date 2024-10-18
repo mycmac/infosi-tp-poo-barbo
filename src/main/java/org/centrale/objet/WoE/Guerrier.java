@@ -1,92 +1,79 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
 
-import java.util.Random;
 import java.util.ArrayList;
-
+import java.util.Random;
 
 /**
- * Classe représentant un Guerrier dans le jeu.
- * Le Guerrier est une classe dérivée de la classe Personnage et implémente l'interface Combattant.
- * Il possède une épée et peut attaquer une créature en combat rapproché (au corps à corps).
- * 
- * @author PRO
+ * Classe représentant un guerrier, un type de personnage spécialisé dans le combat au corps à corps.
+ * Le guerrier utilise une épée et peut attaquer les créatures à courte distance.
  */
 public class Guerrier extends Personnage implements Combattant {
-    // L'épée du Guerrier, utilisée pour infliger des dégâts lors des attaques
-    private Epee e;
+    private Epee e = new Epee(); // L'épée utilisée par le guerrier
+    
 
     /**
-     * Constructeur complet pour créer un Guerrier avec tous ses attributs.
+     * Constructeur de la classe Guerrier avec tous les paramètres.
      * 
-     * @param n Le nom du Guerrier
-     * @param pV Points de vie du Guerrier
-     * @param dA Dégâts d'attaque du Guerrier
-     * @param pPar Points de parade du Guerrier
-     * @param paAtt Page d'attaque du Guerrier
-     * @param paPar Page de parade du Guerrier
-     * @param dMax Distance maximale d'attaque
-     * @param p Position du Guerrier dans le jeu
-     * @param e L'épée du Guerrier
+     * @param n Nom du guerrier.
+     * @param pV Points de vie du guerrier.
+     * @param dA Dégâts d'attaque du guerrier.
+     * @param pPar Points de parade du guerrier.
+     * @param paAtt Page d'attaque (probabilité de réussir une attaque).
+     * @param paPar Page de parade (probabilité de réussir une parade).
+     * @param dMax Distance d'attaque maximale du guerrier.
+     * @param p Position du guerrier sur la carte.
+     * @param e L'épée du guerrier.
+     * @param inventaire Inventaire des objets que possède le guerrier.
      */
-    public Guerrier(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, Epee e) {
-        super(n, pV, dA, pPar, paAtt, paPar, dMax, p); // Appel du constructeur de la classe mère Personnage
-        this.e = e; // Initialisation de l'épée du Guerrier
+    public Guerrier(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, Epee e, ArrayList<ObjetNumero> inventaire) {
+        super(n, pV, dA, pPar, paAtt, paPar, dMax, p, inventaire);
+        this.e = e;
     }
 
     /**
-     * Constructeur de copie pour créer un Guerrier à partir d'un autre Guerrier.
+     * Constructeur de copie pour créer un guerrier à partir d'un autre guerrier.
      * 
-     * @param g Guerrier à copier
+     * @param g Le guerrier à copier.
      */
     public Guerrier(Guerrier g) {
-        super(g); // Copie les attributs de la classe mère Personnage
-        this.e = g.e; // Copie l'épée du Guerrier
+        super(g);
+        this.e = g.e;
     }
-    
+
     /**
-     * Constructeur par défaut pour créer un Guerrier sans attributs spécifiés.
+     * Constructeur par défaut de la classe Guerrier.
+     * Il attribue une puissance aléatoire comprise entre 25 et 100 à l'épée 
      */
     public Guerrier() {
-        super(); // Appel au constructeur par défaut de la classe mère Personnage
+        super() ;        
+        Random random = new Random() ;
+        int rand = random.nextInt(75) + 25 ;
+        e.setPuissance(rand) ;
     }
 
     /**
-     * Constructeur pour créer un Guerrier avec un attribut de type entier (utilisé dans certaines créations spécifiques).
+     * Méthode permettant au guerrier de combattre une créature au corps à corps.
+     * Si la créature est à une distance de 1, le guerrier tente une attaque.
      * 
-     * @param a Un paramètre entier, ici utilisé pour spécifier des attributs du Guerrier
-     */
-    public Guerrier(int a) {
-        super(a); // Appel au constructeur de la classe Personnage avec un paramètre entier
-    }
-
-    /**
-     * Méthode pour que le Guerrier combatte une créature.
-     * Le combat se fait au corps à corps, avec un calcul de chance de réussite de l'attaque et de parade.
-     * 
-     * @param c La créature cible du combat
+     * @param c La créature que le guerrier attaque.
      */
     @Override
     public void combattre(Creature c) {
-        Random rand = new Random(); // Création d'un générateur de nombres aléatoires
-        double distance = this.pos.distanceTo(c.getPos()); // Calcul de la distance entre le Guerrier et la créature
+        Random rand = new Random();
+        double distance = this.pos.distanceTo(c.getPos());
 
-        // Si la cible est à portée de corps à corps (distance = 1)
-        if (distance == 1) {
-            int jetAttaque = rand.nextInt(100) + 1; // Jet d'attaque (valeur entre 1 et 100)
-            if (jetAttaque <= this.pageAtt) { // Si l'attaque réussit
+        if (distance == 1) {  // Combat au corps à corps
+            int jetAttaque = rand.nextInt(100) + 1;
+            if (jetAttaque <= this.pageAtt) {  // Attaque réussie
                 System.out.println("Le guerrier attaque " + c.getNom() + " avec succès !");
-                int jetParade = rand.nextInt(100) + 1; // Jet de parade de la créature
-                if (jetParade <= c.getPagePar()) { // Si la créature parvient à parer l'attaque
-                    int degats = this.degAtt - c.getPtPar(); // Calcul des dégâts après parade
-                    degats = Math.max(degats, 0); // Assure que les dégâts ne sont pas négatifs
-                    c.setPtVie(c.getPtVie() - degats); // Application des dégâts à la créature
+                int jetParade = rand.nextInt(100) + 1;
+                if (jetParade <= c.getPagePar()) {  // Parade réussie
+                    int degats = this.degAtt - c.getPtPar();
+                    degats = Math.max(degats, 0);  // Évite les dégâts négatifs
+                    c.setPtVie(c.getPtVie() - degats);
                     System.out.println(c.getNom() + " a paré l'attaque ! Il lui reste " + c.getPtVie() + " points de vie.");
-                } else { // Si la parade échoue
-                    c.setPtVie(c.getPtVie() - this.degAtt); // Applique les dégâts à la créature
+                } else {  // Parade échouée
+                    c.setPtVie(c.getPtVie() - this.degAtt);
                     System.out.println(c.getNom() + " n'a pas paré ! Il lui reste " + c.getPtVie() + " points de vie.");
                 }
             } else {
@@ -98,33 +85,47 @@ public class Guerrier extends Personnage implements Combattant {
     }
 
     /**
-     * Méthode pour afficher les informations du Guerrier.
+     * Affiche les informations du guerrier, y compris l'épée utilisée.
      */
     @Override
     public void affiche() {
-        super.affiche(); // Affichage des informations du Guerrier (héritées de Personnage)
-        // Le nombre de flèches n'est pas affiché ici car le Guerrier n'a pas de flèches, mais une épée
-        // System.out.println("Nombre de flèches: " + e);
+        super.affiche();
+        //System.out.println("Nombre de flèches: " + e);
     }
 
     /**
-     * Méthode pour créer un groupe de Guerriers et les ajouter à la liste donnée.
-     * Crée 20 Guerriers avec un nom unique et les place sur des cases libres.
+     * Crée plusieurs guerriers aléatoirement positionnés sur la carte 
+     * et les ajoute à la liste des créatures.
      * 
-     * @param a La liste des créatures où les Guerriers seront ajoutés
+     * @param liste Liste des créatures présentes sur la carte.
+     * @param liste_objets Liste des objets présents sur la carte.
      */
-    public void crea_guerrier(ArrayList<Creature> a) {
-        Random random = new Random(); // Création d'un générateur de nombres aléatoires
-        int alea = random.nextInt(100); // Nombre aléatoire de Guerriers à créer
+    public void crea_guerrier(ArrayList<Creature> liste, ArrayList<Objet> liste_objets) {
+        String n = "Guerrier";
+        Guerrier g = new Guerrier();
+        Random random = new Random() ;
+        int x = random.nextInt(50) ;
+        int y = random.nextInt(50) ;
+        Point2D pos = new Point2D(x,y) ;
+        g.setPos(pos) ;
+        deplace_memoire(g, liste, liste_objets);
+        g.setNom(n);
+        g.setPtVie();
+        liste.add(g);
+        
+    }
+    
+    /**
+     * Retourne une chaîne de caractères représentant les attributs du guerrier
+     * pour la sauvegarde dans un fichier texte.
+     *
+     * @return String Les attributs de l'archer sous forme de texte.
+     */
+    @Override
+    public String getTexteSauvegarde() {
+        return "Guerrier;" + getNom() + ";" + getPos().getX() + ";" + getPos().getY() + ";"
+                + getPtVie() + ";" + getDegAtt() + ";" + getPageAtt() + ";" + getPagePar() + ";"
+                + getDistAttMax();
+    }
 
-        // Création de 20 Guerriers
-        for (int i = 0; i < 20; i++) {
-            String n = "Guerrier" + i; // Nom unique pour chaque Guerrier
-            Guerrier gue = new Guerrier(2); // Création d'un nouveau Guerrier
-            gue.setNom(n); // Définition du nom du Guerrier
-            gue.setPtVie(); // Définition des points de vie du Guerrier
-            gue.dplt_case_libre(gue, a); // Placement du Guerrier sur une case libre
-            a.add(gue); // Ajout du Guerrier à la liste de créatures
-        }
-    } 
 }

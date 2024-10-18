@@ -1,129 +1,151 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- * Classe représentant un Archer, un personnage combattant avec des flèches.
- * L'archer est une extension de la classe Personnage et implémente l'interface Combattant.
+ * Classe représentant un archer, un type de personnage qui utilise des flèches pour attaquer à distance.
+ * L'archer hérite des attributs d'un personnage et implémente les méthodes de l'interface Combattant.
+ * 
  */
 public class Archer extends Personnage implements Combattant {
-    // Nombre de flèches que possède l'archer
-    private int nbFleches;
-
+    private int nbFleches; // Nombre de flèches que possède l'archer
+    
     /**
-     * Constructeur de la classe Archer avec tous les attributs définis.
-     * @param n Nom de l'archer
-     * @param pV Points de vie de l'archer
-     * @param dA Dégâts d'attaque de l'archer
-     * @param pPar Points de parade de l'archer
-     * @param paAtt Page d'attaque de l'archer
-     * @param paPar Page de parade de l'archer
-     * @param distAttMax Distance maximale d'attaque
-     * @param p Position de l'archer
-     * @param nbFleches Nombre de flèches que possède l'archer
+     * Constructeur de l'archer avec tous les paramètres.
+     * 
+     * @param n Nom de l'archer.
+     * @param pV Points de vie de l'archer.
+     * @param dA Dégâts d'attaque de l'archer.
+     * @param pPar Points de parade de l'archer.
+     * @param paAtt Page d'attaque (probabilité de réussir une attaque).
+     * @param paPar Page de parade (probabilité de réussir une parade).
+     * @param distAttMax Distance d'attaque maximale de l'archer.
+     * @param p Position de l'archer sur la carte.
+     * @param nbFleches Nombre de flèches que possède l'archer.
+     * @param inventaire Inventaire d'objets que possède l'archer.
      */
-    public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int distAttMax, Point2D p, int nbFleches) {
-        // Appel du constructeur de la classe parent Personnage
-        super(n, pV, dA, pPar, paAtt, paPar, distAttMax, p);
-        this.nbFleches = nbFleches;  // Initialisation du nombre de flèches
+    public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int distAttMax, Point2D p, int nbFleches, ArrayList<ObjetNumero> inventaire) {
+        super(n, pV, dA, pPar, paAtt, paPar, distAttMax, p, inventaire);
+        this.nbFleches = nbFleches;
     }
 
     /**
-     * Constructeur par copie pour créer une nouvelle instance d'archer à partir d'un autre archer.
-     * @param a L'archer à copier
+     * Constructeur de copie pour créer un archer à partir d'un autre archer.
+     * 
+     * @param a Archer à copier.
      */
     public Archer(Archer a) {
-        // Appel du constructeur de la classe parent Personnage pour copier les attributs
         super(a);
-        this.nbFleches = a.nbFleches;  // Copie du nombre de flèches
-    }
-
-    /**
-     * Constructeur par défaut, sans paramètres.
-     */
-    public Archer() {
-        super();  // Appel du constructeur par défaut de Personnage
+        this.nbFleches = a.nbFleches;
     }
     
     /**
-     * Constructeur avec un paramètre pour spécifier une valeur d'initialisation spécifique pour un archer.
-     * @param a Utilisé pour identifier le type d'archer, ici c'est toujours 1 pour l'archer.
+     * Constructeur avec un nom seulement.
+     * 
+     * @param n Nom de l'archer.
      */
-    public Archer(int a) {
-        super(a);  // Appel du constructeur de la classe parent Personnage avec l'argument a
-        this.nbFleches = 10;  // Initialise l'archer avec 10 flèches
+    public Archer(String n) {
+        super();
+        this.nom = n;
+    }    
+    
+    /**
+     * Constructeur par défaut de l'archer.
+     */
+    public Archer() {
+        super();
     }
 
     /**
-     * Méthode pour obtenir le nombre de flèches de l'archer.
-     * @return Nombre de flèches de l'archer
+     * Récupère le nombre de flèches que possède l'archer.
+     * 
+     * @return Le nombre de flèches.
      */
     public int getNbFleches() {
-        return nbFleches;  // Retourne le nombre actuel de flèches
+        return nbFleches;
     }
 
     /**
-     * Méthode permettant à l'archer de combattre une autre créature.
-     * L'archer attaque à distance si la cible est dans la portée.
-     * @param c Créature cible à attaquer
+     * Définit le nombre de flèches de l'archer.
+     * 
+     * @param nbFleches Le nouveau nombre de flèches.
+     */
+    public void setNbFleches(int nbFleches) {
+        this.nbFleches = nbFleches;
+    }
+
+    /**
+     * Méthode permettant à l'archer de combattre une créature.
+     * Si la créature est à portée de tir, l'archer tente une attaque à distance.
+     * 
+     * @param c La créature que l'archer attaque.
      */
     @Override
     public void combattre(Creature c) {
-        Random rand = new Random();  // Générateur de nombres aléatoires
-        double distance = this.pos.distanceTo(c.getPos());  // Calcul de la distance entre l'archer et la cible
+        Random rand = new Random();
+        double distance = this.pos.distanceTo(c.getPos());
 
-        // Si la cible est à une distance valide pour une attaque à distance
-        if (distance > 1 && distance <= this.getDistAttMax()) {  
-            int jetAttaque = rand.nextInt(100) + 1;  // Jet de dé pour déterminer si l'attaque réussit
-            if (jetAttaque <= this.pageAtt) {  // Si l'attaque est réussie
-                c.setPtVie(c.getPtVie() - this.degAtt);  // Réduction des points de vie de la cible
+        if ((distance > 1 && distance <= this.getDistAttMax())&&(this.nbFleches != 0)) {  // Combat à distance
+            int jetAttaque = rand.nextInt(100) + 1;
+            if (jetAttaque <= this.pageAtt) {  // Attaque réussie
+                c.setPtVie(c.getPtVie() - this.degAtt);
                 System.out.println("L'archer tire et touche " + c.getNom() + ", infligeant " + this.degAtt + " dégâts.");
             } else {
                 System.out.println("L'archer rate son tir sur " + c.getNom() + ".");
             }
-            this.nbFleches = this.nbFleches - 1;  // Réduit le nombre de flèches après chaque tir
+            this.nbFleches = this.nbFleches - 1; // L'archer utilise une flèche.
         } else {
-            System.out.println("La cible est hors de portée pour un tir à distance.");
+            if (this.nbFleches == 0){
+                System.out.println("Vous êtes à court de flèches") ;
+            }else{
+                System.out.println("La cible est hors de portée pour un tir à distance.");
+            }
         }
     }
 
     /**
-     * Méthode pour définir le nombre de flèches de l'archer.
-     * @param nbFleches Nouveau nombre de flèches
-     */
-    public void setNbFleches(int nbFleches) {
-        this.nbFleches = nbFleches;  // Modifie le nombre de flèches
-    }
-
-    /**
-     * Méthode pour afficher les informations de l'archer, y compris son nombre de flèches.
+     * Affiche les informations de l'archer, y compris le nombre de flèches restantes.
      */
     @Override
     public void affiche() {
-        super.affiche();  // Appel de la méthode affiche() de la classe parent Personnage
-        System.out.println("Nombre de flèches: " + nbFleches);  // Affichage du nombre de flèches
+        super.affiche();
+        System.out.println("Nombre de flèches: " + nbFleches);
     }
-
+    
     /**
-     * Méthode pour créer plusieurs archers et les ajouter à une liste de créatures.
-     * @param a Liste dans laquelle les archers seront ajoutés
+     * Crée un certain nombre d'archers aléatoirement positionnés sur la carte et les ajoute à la liste des créatures.
+     * 
+     * @param liste Liste des créatures.
+     * @param liste_objets Liste des objets sur la carte.
      */
-    public void crea_archer(ArrayList<Creature> a) {
-        Random random = new Random();  // Générateur de nombres aléatoires
-
-        // Création de 20 archers avec des noms uniques et ajout dans la liste
-        for (int i = 0; i < 20; i++) {
-            String n = "Archer" + i;  // Nom de l'archer basé sur l'index i
-            Archer arch = new Archer(1);  // Création d'un nouvel archer avec un constructeur spécifique
-            arch.setNom(n);  // Définir le nom de l'archer
-            arch.setPtVie();  // Définir les points de vie de l'archer
-            arch.dplt_case_libre(arch, a);  // Déplacement de l'archer à une case libre dans la grille
-            a.add(arch);  // Ajout de l'archer à la liste de créatures
-        }
+    public void crea_archer(ArrayList<Creature> liste, ArrayList<Objet> liste_objets) {
+        String n = "Archer";
+        Archer arch = new Archer();
+        Random random = new Random() ;
+        int x = random.nextInt(50) ;
+        int y = random.nextInt(50) ;
+        Point2D pos = new Point2D(x,y) ;
+        arch.setPos(pos) ;
+        deplace_memoire(arch, liste, liste_objets);
+        arch.setNom(n);
+        arch.setPtVie();
+        liste.add(arch);
+        
     }
+    
+    /**
+     * Retourne une chaîne de caractères représentant les attributs de l'archer
+     * pour la sauvegarde dans un fichier texte.
+     *
+     * @return String Les attributs de l'archer sous forme de texte.
+     */
+    @Override
+    public String getTexteSauvegarde() {
+        return "Archer;" + getNom() + ";" + getPos().getX() + ";" + getPos().getY() + ";"
+                + getPtVie() + ";" + getDegAtt() + ";" + getPageAtt() + ";" + getPagePar() + ";"
+                + getDistAttMax()+";"+getNbFleches();
+    }
+
 }

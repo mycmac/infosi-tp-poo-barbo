@@ -1,85 +1,170 @@
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
+
+/**
+ * Classe représentant un point en deux dimensions (2D) avec des coordonnées x et y.
+ * Cette classe offre des méthodes pour manipuler les points, calculer la distance entre deux points,
+ * et translater les coordonnées.
+ */
 public class Point2D {
-    // Attributs représentant les coordonnées d'un point dans un plan 2D
-    private int x;  // Coordonnée x
-    private int y;  // Coordonnée y
+    // Attributs
+    private int x;  // Coordonnée x du point
+    private int y;  // Coordonnée y du point
 
-    // Constructeur par défaut
+    /**
+     * Constructeur par défaut qui initialise les coordonnées à (0, 0).
+     */
     public Point2D() {
-        this.x = 0;  // Initialise x à 0
-        this.y = 0;  // Initialise y à 0
+        this.x = 0;
+        this.y = 0;
     }
 
-    // Constructeur avec paramètres pour initialiser les coordonnées du point
+    /**
+     * Constructeur avec paramètres pour initialiser les coordonnées avec des valeurs spécifiques.
+     * 
+     * @param x Coordonnée x du point.
+     * @param y Coordonnée y du point.
+     */
     public Point2D(int x, int y) {
-        this.x = x;  // Initialise x avec la valeur donnée
-        this.y = y;  // Initialise y avec la valeur donnée
+        this.x = x;
+        this.y = y;
     }
 
-    // Constructeur de copie pour créer un nouveau Point2D à partir d'un autre
+    /**
+     * Constructeur de copie pour créer un nouveau point à partir d'un autre point.
+     * 
+     * @param p Le point à copier.
+     */
     public Point2D(Point2D p) {
-        this.x = p.x;  // Copie la coordonnée x
-        this.y = p.y;  // Copie la coordonnée y
+        this.x = p.x;
+        this.y = p.y;
     }
 
-    // Accesseurs (getters) pour accéder aux coordonnées x et y
+    // Accesseurs (getters)
+
+    /**
+     * Récupère la coordonnée x du point.
+     * 
+     * @return La coordonnée x.
+     */
     public int getX() {
-        return x;  // Retourne la coordonnée x
+        return x;
     }
 
+    /**
+     * Récupère la coordonnée y du point.
+     * 
+     * @return La coordonnée y.
+     */
     public int getY() {
-        return y;  // Retourne la coordonnée y
+        return y;
     }
 
-    // Mutateurs (setters) pour modifier les coordonnées x et y
+    // Mutateurs (setters)
+
+    /**
+     * Modifie la coordonnée x du point.
+     * 
+     * @param x La nouvelle coordonnée x.
+     */
     public void setX(int x) {
-        this.x = x;  // Modifie la coordonnée x
+        this.x = x;
     }
 
+    /**
+     * Modifie la coordonnée y du point.
+     * 
+     * @param y La nouvelle coordonnée y.
+     */
     public void setY(int y) {
-        this.y = y;  // Modifie la coordonnée y
+        this.y = y;
     }
 
-    // Méthode pour définir les deux coordonnées en même temps
+    /**
+     * Définit simultanément les deux coordonnées x et y du point.
+     * 
+     * @param x La nouvelle coordonnée x.
+     * @param y La nouvelle coordonnée y.
+     */
     public void setCoordinates(int x, int y) {
-        this.x = x;  // Modifie la coordonnée x
-        this.y = y;  // Modifie la coordonnée y
-    }
-    
-    // Méthode pour translater (déplacer) le point d'un certain décalage (dx, dy)
-    public void translate(int dx, int dy){
-        this.x = this.x + dx;  // Déplace la coordonnée x de dx
-        this.y = this.y + dy;  // Déplace la coordonnée y de dy
-    }
-    
-    // Méthode pour modifier les coordonnées directement
-    public void modifier(int xx, int yy){
-        this.x = xx;  // Remplace la coordonnée x par xx
-        this.y = yy;  // Remplace la coordonnée y par yy
+        this.x = x;
+        this.y = y;
     }
 
-    // Méthode pour calculer la distance entre ce point et un autre Point2D
-    public double distanceTo(Point2D p) {
-        int dx = p.getX() - this.x;  // Différence en x
-        int dy = p.getY() - this.y;  // Différence en y
-        return Math.sqrt(dx * dx + dy * dy);  // Utilise le théorème de Pythagore pour calculer la distance
+    /**
+     * Translate le point en ajoutant des valeurs delta à ses coordonnées actuelles.
+     * 
+     * @param dx La valeur delta à ajouter à la coordonnée x.
+     * @param dy La valeur delta à ajouter à la coordonnée y.
+     */
+    public void translate(int dx, int dy) {
+        this.x = x + dx;
+        this.y = y + dy;
     }
 
-    // Méthode toString pour afficher les coordonnées du point sous forme de chaîne de caractères
+    /**
+     * Modifie les coordonnées du point avec de nouvelles valeurs.
+     * 
+     * @param xx La nouvelle coordonnée x.
+     * @param yy La nouvelle coordonnée y.
+     */
+    public void modifier(int xx, int yy) {
+        this.x = xx;
+        this.y = yy;
+    }
+
+    /**
+     * Calcule la distance entre ce point et un autre point.
+     * 
+     * @param p Le point auquel calculer la distance.
+     * @return La distance entre ce point et le point p.
+     */
+    public float distanceTo(Point2D p) {
+        int dx = p.x - this.x;  // Différence sur l'axe X
+        int dy = p.y - this.y;  // Différence sur l'axe Y
+        return (float) Math.sqrt(dx * dx + dy * dy);  // Conversion du résultat en float
+    }
+
+    /**
+     * Calcule la distance entre deux points donnés.
+     * 
+     * @param p1 Le premier point.
+     * @param p2 Le deuxième point.
+     * @return La distance entre p1 et p2.
+     */
+    public float distance_point(Point2D p1, Point2D p2) {
+        int x1 = p1.getX();
+        int x2 = p2.getX();
+        int y1 = p1.getY();
+        int y2 = p2.getY();
+        return (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    }
+
+    /**
+     * Retourne une représentation textuelle du point au format (x, y).
+     * 
+     * @return Une chaîne de caractères représentant les coordonnées du point.
+     */
     @Override
     public String toString() {
-        return "(" + x + ", " + y + ")";  // Retourne une chaîne formatée (x, y)
+        return "(" + x + ", " + y + ")";
     }
 
-    // Méthode equals pour comparer deux objets Point2D
+    /**
+     * Compare ce point avec un autre objet pour vérifier s'ils sont égaux.
+     * Deux points sont égaux si leurs coordonnées x et y sont identiques.
+     * 
+     * @param obj L'objet à comparer avec ce point.
+     * @return true si les deux objets sont égaux, sinon false.
+     */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)  // Vérifie si les deux objets sont le même
+        if (this == obj)
             return true;
-        if (obj == null || getClass() != obj.getClass())  // Vérifie si l'objet est null ou d'une classe différente
+        if (obj == null || getClass() != obj.getClass())
             return false;
-        Point2D point = (Point2D) obj;  // Cast l'objet en Point2D
-        return x == point.x && y == point.y;  // Compare les coordonnées x et y
+        Point2D point = (Point2D) obj;
+        return x == point.x && y == point.y;
     }
 }

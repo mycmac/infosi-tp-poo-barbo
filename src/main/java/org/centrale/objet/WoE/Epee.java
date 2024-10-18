@@ -1,44 +1,79 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Classe représentant une épée dans le jeu.
- * L'épée est un objet qui peut avoir une puissance, permettant d'influencer les combats.
- * Elle hérite de la classe Objet.
- * 
- * @author barbo
+ * Classe représentant une épée dans le jeu, qui est un type d'objet. 
+ * L'épée possède un attribut supplémentaire : la puissance de l'épée, qui peut varier.
  */
 public class Epee extends Objet {
 
-    // Puissance de l'épée, utilisée pour déterminer l'efficacité de l'arme en combat
-    private int puissance;
+    private int puissance; // Puissance de l'épée
     
     /**
-     * Méthode pour créer une liste d'épées avec un nombre aléatoire d'objets.
-     * Cette méthode génère un nombre aléatoire d'épées et les ajoute à la liste fournie.
+     * Constructeur de l'épée avec nom, position et puissance spécifiés.
      * 
-     * @param a La liste d'objets à laquelle les épées seront ajoutées
+     * @param nom Le nom de l'épée.
+     * @param pos La position de l'épée dans le jeu.
+     * @param puissance La puissance de l'épée.
      */
-    public void crea_epee(ArrayList<Objet> a) {
-        Random random = new Random(); // Création d'un générateur de nombres aléatoires
-        int alea = random.nextInt(100); // Génération d'un nombre aléatoire entre 0 et 99
+    public Epee(String nom, Point2D pos, int puissance) {
+        super(nom, pos);
+        this.puissance = puissance;
+    }
+    
+    /**
+     * Constructeur par défaut de l'épée. 
+     * La puissance est initialisée à 0.
+     */
+    public Epee() {
+        super();
+        this.puissance = 0;
+    }
 
-        // Boucle pour créer et ajouter des épées à la liste "a"
-        for (int i = 0; i < alea; i++) {
-            String n = "Epee" + i; // Nom de l'épée, unique pour chaque instance
-            Epee e = new Epee(); // Création d'une nouvelle épée
-            e.setNom(n); // Définition du nom de l'épée
-            a.add(e); // Ajout de l'épée à la liste
+    /**
+     * Définit la puissance de l'épée.
+     * 
+     * @param p La nouvelle puissance de l'épée.
+     */
+    public void setPuissance(int p) {
+        this.puissance = p;
+    }
+
+    /**
+     * Constructeur de copie pour créer une nouvelle épée à partir d'une autre.
+     * 
+     * @param e L'épée à copier.
+     */
+    public Epee(Epee e) {
+        super(e);
+        this.puissance = e.puissance;
+    }
+
+    /**
+     * Récupère la puissance de l'épée.
+     * 
+     * @return La puissance de l'épée.
+     */
+    public int getPuissance() {
+        return puissance;
+    }
+
+    /**
+     * Crée plusieurs épées aléatoires avec des noms générés, 
+     * et les ajoute à la liste des objets du jeu.
+     * 
+     * @param liste La liste des objets du jeu.
+     */
+    public void crea_epee(ArrayList<Objet> liste) {
+        Random random = new Random();
+        int rand = random.nextInt(100);
+        for (int i = 0; i < rand; i++) {
+            String n = "Archer" + i;
+            Epee arch = new Epee();
+            arch.setNom(n);
+            liste.add(arch);
         }
-    } 
+    }
 }
-
-
-
- 
